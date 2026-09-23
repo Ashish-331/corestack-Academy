@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^sudo -u postgres psql$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
