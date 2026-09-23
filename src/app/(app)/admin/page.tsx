@@ -12,7 +12,7 @@ export const metadata = { title: "Author studio" };
 
 export default async function AdminPage() {
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/admin-login");
 
   if (user.role !== "admin") {
     return (
@@ -21,7 +21,16 @@ export default async function AdminPage() {
           icon={<Library className="h-5 w-5" />}
           title="Author access only"
           description="The author studio is limited to admin accounts. Sign in as author@corestack.dev (password corestack123) to edit the catalog."
-          action={<LinkButton href="/dashboard">Back to dashboard</LinkButton>}
+          action={
+            <div className="flex items-center gap-3">
+              <LinkButton href="/admin-login" tone="primary">
+                Author Sign In
+              </LinkButton>
+              <LinkButton href="/dashboard" tone="secondary">
+                Back to dashboard
+              </LinkButton>
+            </div>
+          }
         />
       </div>
     );

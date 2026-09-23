@@ -23,7 +23,7 @@ const courseSchema = z.object({
   glow: z.string().trim().max(160).default("shadow-indigo-500/30"),
   tags: z.array(z.string().trim().min(1).max(30)).max(12).default([]),
   outcomes: z.array(z.string().trim().min(1).max(200)).max(12).default([]),
-  author: z.string().trim().max(80).default("CoreStack"),
+  author: z.string().trim().max(80).default("CoreStack Academy"),
   published: z.boolean().default(true),
   firstModuleTitle: z.string().trim().max(120).optional(),
 });

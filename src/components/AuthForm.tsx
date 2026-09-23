@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Loader2, Sparkles } from "lucide-react";
+import { ArrowRight, Loader2, ShieldCheck, Sparkles } from "lucide-react";
 import { buttonClass, inputClass } from "@/components/ui";
 
 export default function AuthForm({ mode }: { mode: "login" | "register" }) {
@@ -39,7 +39,7 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
     <div className="w-full max-w-md">
       <div className="panel animate-fade-up p-7">
         <h1 className="text-2xl font-bold tracking-tight text-white">
-          {isLogin ? "Welcome back" : "Create your account"}
+          {isLogin ? "Welcome back to CoreStack Academy" : "Create your CoreStack Academy account"}
         </h1>
         <p className="mt-1.5 text-sm text-slate-400">
           {isLogin
@@ -105,6 +105,17 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
             </>
           )}
         </p>
+
+        {isLogin ? (
+          <div className="mt-4 border-t border-white/10 pt-3 text-center">
+            <Link
+              href="/admin-login"
+              className="inline-flex items-center gap-1.5 text-xs text-slate-500 transition hover:text-amber-300"
+            >
+              <ShieldCheck className="h-3.5 w-3.5" /> Author / Admin Sign In &rarr;
+            </Link>
+          </div>
+        ) : null}
       </div>
 
       <div className="panel mt-4 p-4">

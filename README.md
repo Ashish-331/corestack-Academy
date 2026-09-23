@@ -1,4 +1,4 @@
-# CoreStack
+# CoreStack Academy
 
 A full-stack rebuild of [Ashish-331/CoreStack](https://github.com/Ashish-331/CoreStack) — the six-course
 CS curriculum (Operating Systems, DBMS, System Design, DSA, Object-Oriented Design, Computer Networks) —
@@ -88,17 +88,18 @@ and **one** API (`POST /api/quiz-answers`) persists every answer.
 | --- | --- |
 | `/` | public landing page (server rendered, SEO metadata) |
 | `/login`, `/register` | auth forms with one-click demo credentials |
+| `/admin-login` | dedicated admin & author authentication portal with role badges & direct `/admin` redirect |
 | `/dashboard` | stats (completed, study time, active days, consecutive streak), continue-learning, per-course progress, recent activity, recent notes |
 | `/catalog` | searchable course grid + **lesson-level results** linking straight to the matched lesson |
 | `/courses/[slug]` | course detail: outcomes, curriculum accordion, progress |
 | `/courses/[slug]/[lessonSlug]` | lesson reader: sanitised body, TOC, quiz, practice, notes, complete + bookmark, prev/next |
 | `/notes` | note CRUD (create, edit, pin, delete) with optimistic updates |
 | `/bookmarks` | saved lessons |
-| `/admin` | author studio: course/module/lesson CRUD, quiz JSON editing, draft flag |
+| `/admin` | author studio: course/module/lesson CRUD, HTML course importer, live preview mode, formatting shortcuts, quiz JSON editing, draft flag |
 
 API routes live under `src/app/api/`: `auth/{register,login,logout}`, `progress`, `bookmarks`,
 `quiz-answers`, `notes` + `notes/[id]`, `search`, `courses` + `courses/[slug]`, `modules`,
-`lessons` + `lessons/[id]`. Admin routes are role-gated (`requireAdmin()`); everything learner-facing
+`lessons` + `lessons/[id]`, `admin/import-html`, `admin/preview-html`. Admin routes are role-gated (`requireAdmin()`); everything learner-facing
 is session-gated (`requireUser()`).
 
 ### UX details
@@ -122,4 +123,4 @@ is session-gated (`requireUser()`).
 - The upstream `test-app.mjs` / `test-debug.mjs` imported `puppeteer-core`, which was never declared
   as a dependency, so neither script could run. They are not carried over; the CI build plus type
   check is the smoke test.
-- `package.json` is named `corestack`, not the Vite scaffold default.
+- `package.json` is named `corestack-academy`, not the Vite scaffold default.

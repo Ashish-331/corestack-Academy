@@ -17,7 +17,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
         </div>
         <h1 className="mt-5 text-xl font-bold text-white">Something broke on this screen</h1>
         <p className="mt-2 text-sm leading-6 text-slate-400">
-          The error was caught by the app boundary, so the rest of CoreStack is untouched. You can retry the render or head back to the
+          The error was caught by the app boundary, so the rest of CoreStack Academy is untouched. You can retry the render or head back to the
           dashboard.
         </p>
         {error.digest ? <p className="mt-3 font-mono text-[11px] text-slate-600">digest: {error.digest}</p> : null}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Library, NotebookPen, Sparkles, Target } from "lucide-react";
+import { ArrowRight, CheckCircle2, Library, NotebookPen, ShieldCheck, Sparkles, Target } from "lucide-react";
 import { CourseGlyph, LinkButton, minutesLabel } from "@/components/ui";
 import { getCurrentUser } from "@/lib/auth";
 import { listCourseSummaries } from "@/lib/data";
@@ -18,7 +18,7 @@ export default async function LandingPage() {
       <header className="flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
           <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 font-black text-white">CS</span>
-          <span className="text-lg font-bold tracking-tight text-white">CoreStack</span>
+          <span className="text-lg font-bold tracking-tight text-white">CoreStack Academy</span>
         </Link>
         <nav className="flex items-center gap-2">
           {user ? (
@@ -47,7 +47,7 @@ export default async function LandingPage() {
             The CS curriculum you keep restarting — finally <span className="bg-gradient-to-r from-indigo-300 to-emerald-300 bg-clip-text text-transparent">finished</span>.
           </h1>
           <p className="mt-5 max-w-xl text-[17px] leading-8 text-slate-300">
-            CoreStack turns six interview-critical subjects into a tracked course platform: operating systems, DBMS, system design,
+            CoreStack Academy turns six interview-critical subjects into a tracked course platform: operating systems, DBMS, system design,
             DSA, object-oriented design and computer networks. Real lessons, graded quizzes, inline notes, and progress stored in
             Postgres against your account.
           </p>
@@ -123,8 +123,11 @@ export default async function LandingPage() {
         </div>
       </section>
 
-      <footer className="mt-20 border-t border-white/10 pt-6 text-xs text-slate-500">
-        CoreStack — a full-stack rebuild of the CoreStack curriculum on Next.js, Drizzle and PostgreSQL.
+      <footer className="mt-20 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-slate-500">
+        <p>CoreStack Academy — a full-stack rebuild of the CoreStack curriculum on Next.js, Drizzle and PostgreSQL.</p>
+        <Link href="/admin-login" className="flex items-center gap-1.5 text-slate-500 transition hover:text-amber-300">
+          <ShieldCheck className="h-3.5 w-3.5" /> Author / Admin Sign In
+        </Link>
       </footer>
     </div>
   );

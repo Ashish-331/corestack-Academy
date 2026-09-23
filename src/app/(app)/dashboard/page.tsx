@@ -23,8 +23,8 @@ export default async function DashboardPage() {
     <div className="mx-auto max-w-6xl space-y-8">
       <header className="animate-fade-up flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-indigo-300">Dashboard</p>
-          <h1 className="mt-1 text-3xl font-bold tracking-tight text-white">Welcome back, {firstName}</h1>
+          <p className="text-xs font-semibold uppercase tracking-wider text-indigo-300">CoreStack Academy · Dashboard</p>
+          <h1 className="mt-1 text-3xl font-bold tracking-tight text-white">Welcome back to CoreStack Academy, {firstName}</h1>
           <p className="mt-1.5 text-sm text-slate-400">
             {data.continueRows.length
               ? `You have ${data.continueRows.length} lesson${data.continueRows.length > 1 ? "s" : ""} in progress.`

@@ -9,7 +9,10 @@ export const dynamic = "force-dynamic";
 export default async function AuthLayout({ children }: { children: ReactNode }) {
   await ensureSeeded();
   const user = await getCurrentUser();
-  if (user) redirect("/dashboard");
+  if (user) {
+    if (user.role === "admin") redirect("/admin");
+    redirect("/dashboard");
+  }
 
   return (
     <div className="grid min-h-dvh lg:grid-cols-2">
@@ -19,7 +22,7 @@ export default async function AuthLayout({ children }: { children: ReactNode }) 
         <div className="relative flex h-full flex-col justify-center gap-8 px-14">
           <Link href="/" className="flex items-center gap-3">
             <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 font-black text-white">CS</span>
-            <span className="text-lg font-bold tracking-tight text-white">CoreStack</span>
+            <span className="text-lg font-bold tracking-tight text-white">CoreStack Academy</span>
           </Link>
           <h2 className="max-w-md text-3xl font-bold leading-tight text-white">
             Six deep CS courses. One place to actually finish them.

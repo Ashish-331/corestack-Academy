@@ -14,6 +14,7 @@ import {
   Menu,
   Search,
   Settings2,
+  ShieldCheck,
 } from "lucide-react";
 import { CourseGlyph, inputClass } from "@/components/ui";
 
@@ -133,7 +134,7 @@ export default function AppShell({
           CS
         </span>
         <span>
-          <span className="block text-sm font-bold tracking-tight text-white">CoreStack</span>
+          <span className="block text-sm font-bold tracking-tight text-white">CoreStack Academy</span>
           <span className="block text-[11px] text-slate-400">CS fundamentals, tracked</span>
         </span>
       </Link>
@@ -221,6 +222,14 @@ export default function AppShell({
           {signingOut ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogOut className="h-4 w-4" />}
           Sign out
         </button>
+        {user.role !== "admin" ? (
+          <Link
+            href="/admin-login"
+            className="flex items-center justify-center gap-1.5 px-3 py-1 text-[11px] text-slate-500 transition hover:text-amber-300"
+          >
+            <ShieldCheck className="h-3 w-3" /> Author / Admin Sign In
+          </Link>
+        ) : null}
       </div>
     </div>
   );

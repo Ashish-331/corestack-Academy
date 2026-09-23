@@ -18,6 +18,7 @@ const OPTIONS: sanitizeHtml.IOptions = {
     "span", "div", "figure", "figcaption",
     "table", "thead", "tbody", "tfoot", "tr", "th", "td", "caption", "col", "colgroup",
     "a", "img",
+    "details", "summary",
   ],
   allowedAttributes: {
     a: ["href", "name", "target", "rel", "title"],
@@ -29,9 +30,11 @@ const OPTIONS: sanitizeHtml.IOptions = {
     p: ["class", "id"],
     th: ["colspan", "rowspan", "scope"],
     td: ["colspan", "rowspan"],
+    details: ["open", "class"],
+    summary: ["class"],
     "*": ["id"],
   },
-  allowedSchemes: ["http", "https", "mailto", "data"],
+  allowedSchemes: ["http", "https", "mailto"],
   allowedSchemesByTag: { img: ["http", "https", "data"] },
   allowProtocolRelative: false,
   transformTags: {

@@ -46,7 +46,7 @@ export const courses = pgTable("courses", {
   glow: text("glow").notNull().default("shadow-indigo-500/30"),
   tags: jsonb("tags").$type<string[]>().notNull().default([]),
   outcomes: jsonb("outcomes").$type<string[]>().notNull().default([]),
-  author: text("author").notNull().default("CoreStack"),
+  author: text("author").notNull().default("CoreStack Academy"),
   updated: text("updated").notNull().default(""),
   published: boolean("published").notNull().default(true),
   position: integer("position").notNull().default(0),

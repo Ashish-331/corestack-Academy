@@ -86,84 +86,113 @@
 }
 
 /* ── lesson typography ──────────────────────────────────────── */
-.lesson {
+.lesson,
+.lesson-prose {
   @apply text-[15.5px] leading-7 text-slate-300;
 }
-.lesson > *:first-child {
+.lesson > *:first-child,
+.lesson-prose > *:first-child {
   margin-top: 0;
 }
 .lesson h1,
 .lesson h2,
 .lesson h3,
-.lesson h4 {
+.lesson h4,
+.lesson-prose h1,
+.lesson-prose h2,
+.lesson-prose h3,
+.lesson-prose h4 {
   @apply mt-10 mb-3 scroll-mt-24 font-semibold text-white;
 }
-.lesson h1 {
+.lesson h1,
+.lesson-prose h1 {
   @apply text-2xl;
 }
-.lesson h2 {
+.lesson h2,
+.lesson-prose h2 {
   @apply text-xl;
 }
-.lesson h3 {
+.lesson h3,
+.lesson-prose h3 {
   @apply text-lg text-slate-100;
 }
-.lesson h4 {
+.lesson h4,
+.lesson-prose h4 {
   @apply text-base text-slate-200;
 }
-.lesson p {
+.lesson p,
+.lesson-prose p {
   @apply my-4;
 }
-.lesson p.lead {
+.lesson p.lead,
+.lesson-prose p.lead {
   @apply border-l-2 border-indigo-400/60 pl-4 text-[17px] leading-8 text-slate-100;
 }
-.lesson strong {
+.lesson strong,
+.lesson-prose strong {
   @apply font-semibold text-white;
 }
-.lesson em {
+.lesson em,
+.lesson-prose em {
   @apply text-slate-200;
 }
-.lesson a {
+.lesson a,
+.lesson-prose a {
   @apply text-indigo-300 underline decoration-indigo-400/40 underline-offset-2 hover:text-indigo-200;
 }
-.lesson ul {
+.lesson ul,
+.lesson-prose ul {
   @apply my-4 list-disc space-y-2 pl-6;
 }
-.lesson ol {
+.lesson ol,
+.lesson-prose ol {
   @apply my-4 list-decimal space-y-2 pl-6;
 }
-.lesson li::marker {
+.lesson li::marker,
+.lesson-prose li::marker {
   @apply text-indigo-300;
 }
-.lesson blockquote {
+.lesson blockquote,
+.lesson-prose blockquote {
   @apply my-5 rounded-r-xl border-l-4 border-amber-400/70 bg-amber-400/[0.07] px-4 py-3 text-slate-200 italic;
 }
-.lesson code {
+.lesson code,
+.lesson-prose code {
   @apply rounded-md border border-white/10 bg-white/[0.07] px-1.5 py-0.5 font-mono text-[13px] text-emerald-200;
 }
-.lesson pre {
+.lesson pre,
+.lesson-prose pre {
   @apply my-5 overflow-x-auto rounded-xl border border-white/10 bg-slate-900/80 p-4 text-[13px] leading-6;
 }
-.lesson pre code {
+.lesson pre code,
+.lesson-prose pre code {
   @apply border-0 bg-transparent p-0 text-slate-200;
 }
-.lesson table {
+.lesson table,
+.lesson-prose table {
   @apply my-6 w-full border-collapse overflow-hidden rounded-xl text-sm;
 }
-.lesson thead th {
+.lesson thead th,
+.lesson-prose thead th {
   @apply border border-white/10 bg-white/[0.07] px-3 py-2 text-left font-semibold text-slate-100;
 }
-.lesson tbody td {
+.lesson tbody td,
+.lesson-prose tbody td {
   @apply border border-white/10 px-3 py-2 align-top text-slate-300;
 }
-.lesson hr {
+.lesson hr,
+.lesson-prose hr {
   @apply my-8 border-white/10;
 }
-.lesson .callout {
+.lesson .callout,
+.lesson-prose .callout {
   @apply my-6 rounded-xl border border-indigo-400/25 bg-indigo-400/[0.08] px-4 py-3 text-slate-200;
 }
-.lesson .callout.analogy {
+.lesson .callout.analogy,
+.lesson-prose .callout.analogy {
   @apply border-emerald-400/25 bg-emerald-400/[0.08];
 }
-.lesson img {
+.lesson img,
+.lesson-prose img {
   @apply my-6 rounded-xl border border-white/10;
 }
