@@ -21,6 +21,9 @@ export const pool =
   new Pool({
     connectionString: databaseUrl,
     ssl: isProductionOrCloud ? { rejectUnauthorized: false } : undefined,
+    max: isProductionOrCloud ? 2 : 10,
+    idleTimeoutMillis: 10000,
+    connectionTimeoutMillis: 5000,
   });
 
 if (process.env.NODE_ENV !== "production") {
