@@ -19,7 +19,6 @@ import {
   Pencil,
   Plus,
   Save,
-  Sparkles,
   Table,
   Trash2,
   TriangleAlert,
@@ -139,8 +138,8 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
     description: "",
     category: "Systems" as "Systems" | "Data" | "Architecture" | "Networks" | "Programming",
     level: "Intermediate" as "Beginner" | "Intermediate" | "Advanced",
-    accent: "from-indigo-500 to-violet-500",
-    glow: "shadow-indigo-500/30",
+    accent: "from-zinc-700 to-zinc-900",
+    glow: "shadow-zinc-700/20",
     courseId: courses[0]?.id || 0,
     moduleId: 0,
     html: "",
@@ -226,8 +225,8 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
         description: "",
         category: "Programming",
         level: "Beginner",
-        accent: "from-indigo-500 to-violet-500",
-        glow: "shadow-indigo-500/30",
+        accent: "from-zinc-700 to-zinc-900",
+        glow: "shadow-zinc-700/20",
         tags: [],
         outcomes: [],
         author: "CoreStack Academy",
@@ -581,7 +580,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
 
   const input = (label: string, key: keyof AdminCourse, type = "text") => (
     <label className="block">
-      <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">{label}</span>
+      <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">{label}</span>
       <input
         type={type}
         value={String(selected?.[key] ?? "")}
@@ -597,7 +596,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-amber-300">Author studio · CoreStack Academy</p>
           <h1 className="mt-1 text-3xl font-bold tracking-tight text-white">Catalog & Curriculum CRUD</h1>
-          <p className="mt-1.5 text-sm text-slate-400">
+          <p className="mt-1.5 text-sm text-zinc-400">
             Create courses, structure modules, import rich course HTML, and author lessons with live learner-styled previews.
           </p>
         </div>
@@ -619,7 +618,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
       </header>
 
       {error ? (
-        <p className="rounded-xl border border-rose-400/30 bg-rose-500/10 px-4 py-2.5 text-sm text-rose-200" role="alert">
+        <p className="rounded-lg border border-rose-950/80 bg-rose-950/30 px-4 py-2.5 text-sm text-rose-300" role="alert">
           {error}
         </p>
       ) : null}
@@ -672,21 +671,21 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
       ) : (
         <div className="grid gap-5 lg:grid-cols-[280px_minmax(0,1fr)]">
           <aside className="panel h-fit p-3">
-            <p className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500">Courses</p>
+            <p className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">Courses</p>
             <ul className="space-y-1">
               {data.map((c) => (
                 <li key={c.id}>
                   <button
                     onClick={() => setSelectedId(c.id)}
-                    className={`focus-ring flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-sm transition ${
+                    className={`focus-ring flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition ${
                       selectedId === c.id
                         ? "bg-amber-400/10 text-amber-100 ring-1 ring-amber-400/25"
-                        : "text-slate-300 hover:bg-white/5"
+                        : "text-zinc-300 hover:bg-zinc-800"
                     }`}
                   >
                     <BookOpen className="h-4 w-4 shrink-0 opacity-70" />
                     <span className="min-w-0 flex-1 truncate">{c.title}</span>
-                    <span className="shrink-0 text-[10px] text-slate-500">
+                    <span className="shrink-0 text-[10px] text-zinc-500">
                       {c.modules.reduce((n, m) => n + m.lessons.length, 0)}
                     </span>
                   </button>
@@ -699,7 +698,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
             <div className="space-y-5">
               <section className="panel p-5">
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-slate-400">
+                  <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-zinc-400">
                     <Pencil className="h-3.5 w-3.5" /> Course details
                   </h2>
                   <div className="flex items-center gap-2">
@@ -718,7 +717,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                   {input("Short code", "short")}
                   {input("Author", "author")}
                   <label className="block sm:col-span-2">
-                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">Tagline</span>
+                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Tagline</span>
                     <input
                       value={selected.tagline}
                       onChange={(e) => patchCourseLocal({ tagline: e.target.value })}
@@ -726,7 +725,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                     />
                   </label>
                   <label className="block sm:col-span-2">
-                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">Description</span>
+                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Description</span>
                     <textarea
                       value={selected.description}
                       onChange={(e) => patchCourseLocal({ description: e.target.value })}
@@ -735,35 +734,35 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                     />
                   </label>
                   <label className="block">
-                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">Category</span>
+                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Category</span>
                     <select
                       value={selected.category}
                       onChange={(e) => patchCourseLocal({ category: e.target.value })}
                       className={inputClass}
                     >
                       {["Systems", "Data", "Architecture", "Networks", "Programming"].map((c) => (
-                        <option key={c} value={c} className="bg-slate-900">
+                        <option key={c} value={c} className="bg-zinc-900">
                           {c}
                         </option>
                       ))}
                     </select>
                   </label>
                   <label className="block">
-                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">Level</span>
+                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Level</span>
                     <select
                       value={selected.level}
                       onChange={(e) => patchCourseLocal({ level: e.target.value })}
                       className={inputClass}
                     >
                       {["Beginner", "Intermediate", "Advanced"].map((c) => (
-                        <option key={c} value={c} className="bg-slate-900">
+                        <option key={c} value={c} className="bg-zinc-900">
                           {c}
                         </option>
                       ))}
                     </select>
                   </label>
                   <label className="block sm:col-span-2">
-                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                       Tags (comma separated)
                     </span>
                     <input
@@ -777,7 +776,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                     />
                   </label>
                   <label className="block sm:col-span-2">
-                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                       Outcomes (one per line)
                     </span>
                     <textarea
@@ -791,12 +790,12 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                       className={inputClass}
                     />
                   </label>
-                  <label className="flex items-center gap-2 text-sm text-slate-300">
+                  <label className="flex items-center gap-2 text-sm text-zinc-300">
                     <input
                       type="checkbox"
                       checked={selected.published}
                       onChange={(e) => patchCourseLocal({ published: e.target.checked })}
-                      className="h-4 w-4 rounded border-white/20 bg-slate-900"
+                      className="h-4 w-4 rounded border-zinc-800 bg-zinc-900"
                     />
                     Published
                   </label>
@@ -811,7 +810,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
 
               <section className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-slate-400">
+                  <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-zinc-400">
                     <Layers className="h-3.5 w-3.5" /> Modules & lessons
                   </h2>
                   <button
@@ -842,11 +841,11 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                             className="focus-ring flex min-w-0 flex-1 items-center gap-2 text-left"
                           >
                             <ChevronDown
-                              className={`h-4 w-4 shrink-0 text-slate-500 transition ${open ? "rotate-180" : ""}`}
+                              className={`h-4 w-4 shrink-0 text-zinc-500 transition ${open ? "rotate-180" : ""}`}
                             />
                             <span className="min-w-0">
                               <span className="block truncate text-sm font-semibold text-white">{mod.title}</span>
-                              <span className="block text-[11px] text-slate-500">{mod.lessons.length} lessons</span>
+                              <span className="block text-[11px] text-zinc-500">{mod.lessons.length} lessons</span>
                             </span>
                           </button>
                           <button
@@ -854,14 +853,14 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                               const next = prompt("Rename module", mod.title);
                               if (next) renameModule(selected.id, mod.id, next);
                             }}
-                            className="focus-ring rounded-lg p-1.5 text-slate-400 hover:bg-white/10 hover:text-slate-100"
+                            className="focus-ring rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100"
                             title="Rename"
                           >
                             <Pencil className="h-3.5 w-3.5" />
                           </button>
                           <button
                             onClick={() => deleteModule(selected.id, mod.id)}
-                            className="focus-ring rounded-lg p-1.5 text-slate-400 hover:bg-white/10 hover:text-rose-300"
+                            className="focus-ring rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-rose-300"
                             title="Delete"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
@@ -869,15 +868,15 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                         </div>
 
                         {open ? (
-                          <ul className="animate-fade-up divide-y divide-white/5 border-t border-white/5">
+                          <ul className="animate-fade-up divide-y divide-zinc-800/60 border-t border-zinc-800/60">
                             {mod.lessons.map((lesson) => (
                               <li key={lesson.id} className="flex flex-wrap items-center gap-3 px-4 py-2.5">
                                 <span className="min-w-0 flex-1">
                                   <span className="flex items-center gap-2">
-                                    <span className="truncate text-[13px] text-slate-200">{lesson.title}</span>
+                                    <span className="truncate text-[13px] text-zinc-200">{lesson.title}</span>
                                     {lesson.draft ? <Badge tone="amber">draft</Badge> : null}
                                   </span>
-                                  <span className="block text-[11px] text-slate-500">
+                                  <span className="block text-[11px] text-zinc-500">
                                     {lesson.minutes} min · {lesson.kind} · {lesson.quizCount} quizzes
                                   </span>
                                 </span>
@@ -914,7 +913,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
               {/* ─────────────────────────── Lesson Editor ─────────────────────────── */}
               {editingLesson ? (
                 <section className="panel animate-fade-up space-y-4 p-5">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                  <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
                     <div className="flex items-center gap-2">
                       <h3 className="text-base font-bold text-white">
                         {editingLesson.id === "new" ? "New Lesson" : "Edit Lesson"}
@@ -931,7 +930,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
 
                   <div className="grid gap-3 sm:grid-cols-2">
                     <label className="block">
-                      <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                      <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                         Lesson Title
                       </span>
                       <input
@@ -942,7 +941,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                       />
                     </label>
                     <label className="block">
-                      <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                      <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                         Summary
                       </span>
                       <input
@@ -953,7 +952,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                       />
                     </label>
                     <label className="block">
-                      <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                      <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                         Estimated Minutes
                       </span>
                       <input
@@ -965,7 +964,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                       />
                     </label>
                     <label className="block">
-                      <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                      <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                         Kind
                       </span>
                       <select
@@ -974,7 +973,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                         className={inputClass}
                       >
                         {["reading", "lab", "case", "quiz"].map((k) => (
-                          <option key={k} value={k} className="bg-slate-900">
+                          <option key={k} value={k} className="bg-zinc-900">
                             {k}
                           </option>
                         ))}
@@ -982,27 +981,27 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                     </label>
                   </div>
 
-                  <label className="flex items-center gap-2 text-sm text-slate-300">
+                  <label className="flex items-center gap-2 text-sm text-zinc-300">
                     <input
                       type="checkbox"
                       checked={lessonForm.draft}
                       onChange={(e) => setLessonForm({ ...lessonForm, draft: e.target.checked })}
-                      className="h-4 w-4 rounded border-white/20 bg-slate-900"
+                      className="h-4 w-4 rounded border-zinc-800 bg-zinc-900"
                     />
                     Draft mode (learners see an explicit “not authored yet” notice)
                   </label>
 
                   {/* Tabbed Editor: Write HTML vs Live Preview */}
-                  <div className="space-y-3 rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
-                      <div className="flex items-center gap-1.5 rounded-xl bg-white/5 p-1">
+                  <div className="space-y-3 rounded-lg border border-zinc-800 bg-zinc-950/40 p-4">
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800 pb-3">
+                      <div className="flex items-center gap-1.5 rounded-lg bg-zinc-900/60 p-1">
                         <button
                           type="button"
                           onClick={() => handleTabChange("write")}
-                          className={`focus-ring flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+                          className={`focus-ring flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs transition ${
                             editorTab === "write"
-                              ? "bg-indigo-600 text-white shadow"
-                              : "text-slate-400 hover:text-white"
+                              ? "bg-zinc-800 text-zinc-100 font-medium shadow"
+                              : "text-zinc-400 hover:text-white"
                           }`}
                         >
                           <Code2 className="h-3.5 w-3.5" /> Write HTML
@@ -1010,17 +1009,17 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                         <button
                           type="button"
                           onClick={() => handleTabChange("preview")}
-                          className={`focus-ring flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+                          className={`focus-ring flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs transition ${
                             editorTab === "preview"
-                              ? "bg-indigo-600 text-white shadow"
-                              : "text-slate-400 hover:text-white"
+                              ? "bg-zinc-800 text-zinc-100 font-medium shadow"
+                              : "text-zinc-400 hover:text-white"
                           }`}
                         >
                           <Eye className="h-3.5 w-3.5" /> Live Preview
                         </button>
                       </div>
 
-                      <span className="text-[11px] text-slate-400">
+                      <span className="text-[11px] text-zinc-400">
                         {editorTab === "write"
                           ? "Allowed: p, h1-h6, ul/ol/li, table, pre/code, blockquote, .lead, .callout"
                           : "Previewing in .lesson-prose reading environment"}
@@ -1031,8 +1030,8 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                     {editorTab === "write" ? (
                       <div className="space-y-3">
                         {/* Formatting Shortcut Buttons */}
-                        <div className="flex flex-wrap items-center gap-1.5 rounded-xl border border-white/10 bg-white/[0.03] p-2">
-                          <span className="px-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                        <div className="flex flex-wrap items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900/60 p-2">
+                          <span className="px-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                             Shortcuts:
                           </span>
                           <button
@@ -1042,10 +1041,10 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 '<div class="callout">\n  <strong>Key Insight:</strong> Explain critical takeaway or rule here.\n</div>\n',
                               )
                             }
-                            className="focus-ring flex items-center gap-1 rounded-lg border border-indigo-400/30 bg-indigo-500/10 px-2 py-1 text-xs font-medium text-indigo-200 transition hover:bg-indigo-500/20"
+                            className="focus-ring flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
                             title="Insert key insight callout box"
                           >
-                            <Sparkles className="h-3 w-3 text-indigo-300" /> Callout
+                            <Lightbulb className="h-3.5 w-3.5 text-zinc-400" /> Callout
                           </button>
                           <button
                             type="button"
@@ -1054,10 +1053,10 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 '<div class="callout analogy">\n  <strong>Real-World Analogy:</strong> Relate this concept to an everyday real-world parallel.\n</div>\n',
                               )
                             }
-                            className="focus-ring flex items-center gap-1 rounded-lg border border-emerald-400/30 bg-emerald-500/10 px-2 py-1 text-xs font-medium text-emerald-200 transition hover:bg-emerald-500/20"
+                            className="focus-ring flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
                             title="Insert real-world analogy box"
                           >
-                            <Lightbulb className="h-3 w-3 text-emerald-300" /> Analogy
+                            <Lightbulb className="h-3.5 w-3.5 text-zinc-400" /> Analogy
                           </button>
                           <button
                             type="button"
@@ -1066,10 +1065,10 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 '<pre><code class="language-typescript">// Example implementation\nfunction handleOperation() {\n  return true;\n}\n</code></pre>\n',
                               )
                             }
-                            className="focus-ring flex items-center gap-1 rounded-lg border border-white/15 bg-white/5 px-2 py-1 text-xs font-medium text-slate-200 transition hover:bg-white/10"
+                            className="focus-ring flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
                             title="Insert code snippet block"
                           >
-                            <Code2 className="h-3 w-3 text-slate-300" /> Code Block
+                            <Code2 className="h-3.5 w-3.5 text-zinc-400" /> Code Block
                           </button>
                           <button
                             type="button"
@@ -1078,10 +1077,10 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 '<div class="overflow-x-auto">\n<table>\n  <thead>\n    <tr><th>Component</th><th>Role</th><th>Trade-off</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>Leader</td><td>Coordinates consensus</td><td>Bottleneck on high write load</td></tr>\n    <tr><td>Follower</td><td>Replicates state machine</td><td>Read lag if eventual</td></tr>\n  </tbody>\n</table>\n</div>\n',
                               )
                             }
-                            className="focus-ring flex items-center gap-1 rounded-lg border border-white/15 bg-white/5 px-2 py-1 text-xs font-medium text-slate-200 transition hover:bg-white/10"
+                            className="focus-ring flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
                             title="Insert structured HTML table"
                           >
-                            <Table className="h-3 w-3 text-slate-300" /> Table
+                            <Table className="h-3.5 w-3.5 text-zinc-400" /> Table
                           </button>
                           <button
                             type="button"
@@ -1090,10 +1089,10 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 '<div class="callout">\n  <strong>Check Your Understanding:</strong> What happens when a network partition disconnects the minority quorum?\n</div>\n',
                               )
                             }
-                            className="focus-ring flex items-center gap-1 rounded-lg border border-amber-400/30 bg-amber-500/10 px-2 py-1 text-xs font-medium text-amber-200 transition hover:bg-amber-500/20"
+                            className="focus-ring flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
                             title="Insert quiz check prompt"
                           >
-                            <HelpCircle className="h-3 w-3 text-amber-300" /> Quiz Block
+                            <HelpCircle className="h-3.5 w-3.5 text-zinc-400" /> Quiz Block
                           </button>
                           <button
                             type="button"
@@ -1102,10 +1101,10 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 '<p class="lead">Introductory thesis sentence that highlights the core concept of this lesson.</p>\n',
                               )
                             }
-                            className="focus-ring flex items-center gap-1 rounded-lg border border-white/15 bg-white/5 px-2 py-1 text-xs font-medium text-slate-200 transition hover:bg-white/10"
+                            className="focus-ring flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
                             title="Insert lead paragraph"
                           >
-                            <FileText className="h-3 w-3 text-slate-300" /> Lead Paragraph
+                            <FileText className="h-3.5 w-3.5 text-zinc-400" /> Lead Paragraph
                           </button>
                         </div>
 
@@ -1122,19 +1121,19 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                       /* Mode 2: Live Learner-Styled Preview */
                       <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                          <span className="text-xs text-slate-400">
+                          <span className="text-xs text-zinc-400">
                             {loadingPreview ? "Sanitizing HTML via server-side sanitizer…" : "Learner reading view preview:"}
                           </span>
                           <button
                             type="button"
                             onClick={() => void updatePreview(lessonForm.contentHtml)}
-                            className="text-xs text-indigo-300 hover:underline"
+                            className="text-xs text-zinc-400 hover:text-white hover:underline"
                           >
                             Re-sanitize & refresh
                           </button>
                         </div>
 
-                        <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-6 lg:p-8">
+                        <div className="panel p-6 lg:p-8">
                           <div className="mb-4 flex flex-wrap items-center gap-2">
                             <Badge tone="indigo">{lessonForm.kind}</Badge>
                             <Badge>{lessonForm.minutes} min</Badge>
@@ -1145,15 +1144,15 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                             {lessonForm.title || "Untitled Lesson"}
                           </h1>
                           {lessonForm.summary ? (
-                            <p className="mt-2 text-sm leading-6 text-slate-400">{lessonForm.summary}</p>
+                            <p className="mt-2 text-sm leading-6 text-zinc-400">{lessonForm.summary}</p>
                           ) : null}
 
-                          <hr className="my-6 border-white/10" />
+                          <hr className="my-6 border-zinc-800" />
 
                           {lessonForm.contentHtml.trim() ? (
                             loadingPreview ? (
-                              <div className="panel flex items-center justify-center gap-3 p-12 text-sm text-slate-400">
-                                <Loader2 className="h-5 w-5 animate-spin text-indigo-400" />
+                              <div className="panel flex items-center justify-center gap-3 p-12 text-sm text-zinc-400">
+                                <Loader2 className="h-5 w-5 animate-spin text-zinc-400" />
                                 <span>Sanitizing HTML preview…</span>
                               </div>
                             ) : previewHtml ? (
@@ -1162,12 +1161,12 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 dangerouslySetInnerHTML={{ __html: previewHtml }}
                               />
                             ) : (
-                              <div className="panel border-dashed border-white/20 p-8 text-center text-sm text-slate-400">
+                              <div className="panel border-dashed border-zinc-800 p-8 text-center text-sm text-zinc-400">
                                 Preview could not be loaded. Click “Re-sanitize & refresh” to try again.
                               </div>
                             )
                           ) : (
-                            <div className="panel border-dashed border-white/20 p-8 text-center text-sm text-slate-400">
+                            <div className="panel border-dashed border-zinc-800 p-8 text-center text-sm text-zinc-400">
                               No HTML authored yet. Switch to “Write HTML” and use the shortcut buttons or write content!
                             </div>
                           )}
@@ -1177,7 +1176,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                   </div>
 
                   <label className="block">
-                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                       Quizzes JSON — [{"{ q, options[], answer, explain }"}]
                     </span>
                     <textarea
@@ -1188,8 +1187,8 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                     />
                   </label>
 
-                  <div className="flex items-center justify-between border-t border-white/10 pt-3">
-                    <p className="flex items-center gap-1.5 text-[11px] text-slate-500">
+                  <div className="flex items-center justify-between border-t border-zinc-800 pt-3">
+                    <p className="flex items-center gap-1.5 text-[11px] text-zinc-500">
                       <TriangleAlert className="h-3 w-3 text-amber-300" /> Script tags and inline event handlers are
                       stripped with sanitize-html automatically.
                     </p>
@@ -1212,16 +1211,16 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
 
       {/* ─────────────────────────── HTML Importer Modal ─────────────────────────── */}
       {importModalOpen ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-slate-950/80 p-4 backdrop-blur-sm">
-          <div className="panel animate-fade-up my-8 max-h-[90vh] w-full max-w-3xl overflow-y-auto border-amber-400/30 bg-slate-900 p-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-zinc-950/80 p-4 backdrop-blur-sm">
+          <div className="panel animate-fade-up my-8 max-h-[90vh] w-full max-w-3xl overflow-y-auto border-zinc-800 bg-zinc-900 p-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
               <div className="flex items-center gap-3">
-                <div className="grid h-10 w-10 place-items-center rounded-xl border border-amber-400/30 bg-amber-500/10 text-amber-300">
+                <div className="grid h-10 w-10 place-items-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-300">
                   <FileCode className="h-5 w-5" />
                 </div>
                 <div>
                   <h2 className="text-lg font-bold text-white">Import Course or Lessons via HTML</h2>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-zinc-400">
                     Ingest full course curricula or lesson HTML. Headings are safely extracted into modules and rich lessons.
                   </p>
                 </div>
@@ -1229,19 +1228,19 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
               <button
                 type="button"
                 onClick={() => setImportModalOpen(false)}
-                className="rounded-lg p-1.5 text-slate-400 hover:bg-white/10 hover:text-white"
+                className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-white"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             {/* Mode selection tabs */}
-            <div className="mt-4 flex rounded-xl bg-white/5 p-1">
+            <div className="mt-4 flex rounded-lg bg-zinc-900/60 p-1">
               <button
                 type="button"
                 onClick={() => setImportMode("new_course")}
-                className={`flex-1 rounded-lg py-2 text-center text-xs font-semibold transition ${
-                  importMode === "new_course" ? "bg-amber-500 text-slate-950 shadow" : "text-slate-400 hover:text-white"
+                className={`flex-1 rounded-md py-2 text-center text-xs transition ${
+                  importMode === "new_course" ? "bg-zinc-800 text-zinc-100 font-medium shadow" : "text-zinc-400 hover:text-white"
                 }`}
               >
                 Create New Course from HTML
@@ -1249,8 +1248,8 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
               <button
                 type="button"
                 onClick={() => setImportMode("existing_course")}
-                className={`flex-1 rounded-lg py-2 text-center text-xs font-semibold transition ${
-                  importMode === "existing_course" ? "bg-amber-500 text-slate-950 shadow" : "text-slate-400 hover:text-white"
+                className={`flex-1 rounded-md py-2 text-center text-xs transition ${
+                  importMode === "existing_course" ? "bg-zinc-800 text-zinc-100 font-medium shadow" : "text-zinc-400 hover:text-white"
                 }`}
               >
                 Add Lessons to Existing Course
@@ -1262,7 +1261,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
               {importMode === "new_course" ? (
                 <div className="grid gap-3 sm:grid-cols-2">
                   <label className="block sm:col-span-2">
-                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                       Course Title (optional - auto-extracted from &lt;h1&gt; if blank)
                     </span>
                     <input
@@ -1280,7 +1279,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                   </label>
 
                   <label className="block">
-                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                       Course Slug
                     </span>
                     <input
@@ -1292,7 +1291,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                   </label>
 
                   <label className="block">
-                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                       Short Code
                     </span>
                     <input
@@ -1304,7 +1303,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                   </label>
 
                   <label className="block">
-                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                       Category
                     </span>
                     <select
@@ -1318,7 +1317,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                       className={inputClass}
                     >
                       {["Systems", "Data", "Architecture", "Networks", "Programming"].map((c) => (
-                        <option key={c} value={c} className="bg-slate-900">
+                        <option key={c} value={c} className="bg-zinc-900">
                           {c}
                         </option>
                       ))}
@@ -1326,7 +1325,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                   </label>
 
                   <label className="block">
-                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                       Level
                     </span>
                     <select
@@ -1340,7 +1339,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                       className={inputClass}
                     >
                       {["Beginner", "Intermediate", "Advanced"].map((c) => (
-                        <option key={c} value={c} className="bg-slate-900">
+                        <option key={c} value={c} className="bg-zinc-900">
                           {c}
                         </option>
                       ))}
@@ -1348,7 +1347,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                   </label>
 
                   <label className="block sm:col-span-2">
-                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                       Tagline
                     </span>
                     <input
@@ -1362,7 +1361,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
               ) : (
                 <div className="grid gap-3 sm:grid-cols-2">
                   <label className="block">
-                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                       Target Course
                     </span>
                     <select
@@ -1373,7 +1372,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                       className={inputClass}
                     >
                       {data.map((c) => (
-                        <option key={c.id} value={c.id} className="bg-slate-900">
+                        <option key={c.id} value={c.id} className="bg-zinc-900">
                           {c.title}
                         </option>
                       ))}
@@ -1381,7 +1380,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                   </label>
 
                   <label className="block">
-                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                       Target Module
                     </span>
                     <select
@@ -1389,13 +1388,13 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                       onChange={(e) => setImportForm({ ...importForm, moduleId: Number(e.target.value) })}
                       className={inputClass}
                     >
-                      <option value={0} className="bg-slate-900">
+                      <option value={0} className="bg-zinc-900">
                         Create new module(s) automatically from headings
                       </option>
                       {data
                         .find((c) => c.id === importForm.courseId)
                         ?.modules.map((m) => (
-                          <option key={m.id} value={m.id} className="bg-slate-900">
+                          <option key={m.id} value={m.id} className="bg-zinc-900">
                             Append to: {m.title}
                           </option>
                         ))}
@@ -1406,7 +1405,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
 
               {/* Extraction Structure Mode */}
               <div>
-                <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                   Headings & Hierarchy Extraction Strategy
                 </span>
                 <div className="grid gap-2 sm:grid-cols-3">
@@ -1436,14 +1435,14 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                           structureMode: mode.id as "auto" | "single_lesson" | "by_headings",
                         })
                       }
-                      className={`rounded-xl border p-3 text-left transition ${
+                      className={`rounded-lg border p-3 text-left transition ${
                         importForm.structureMode === mode.id
-                          ? "border-amber-400/50 bg-amber-400/10 text-white"
-                          : "border-white/10 bg-white/5 text-slate-400 hover:border-white/20"
+                          ? "border-zinc-700 bg-zinc-800 text-white"
+                          : "border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700"
                       }`}
                     >
-                      <p className="text-xs font-semibold text-slate-200">{mode.label}</p>
-                      <p className="mt-1 text-[11px] text-slate-400">{mode.desc}</p>
+                      <p className="text-xs font-semibold text-zinc-200">{mode.label}</p>
+                      <p className="mt-1 text-[11px] text-zinc-400">{mode.desc}</p>
                     </button>
                   ))}
                 </div>
@@ -1452,7 +1451,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
               {/* HTML Input Area */}
               <div>
                 <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                     Course / Lesson HTML
                   </span>
                   <div className="flex items-center gap-2">
@@ -1466,17 +1465,17 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                     <button
                       type="button"
                       onClick={() => fileInputRef.current?.click()}
-                      className="flex items-center gap-1 text-xs text-indigo-300 transition hover:text-indigo-200 hover:underline"
+                      className="flex items-center gap-1 text-xs text-zinc-400 transition hover:text-zinc-200 hover:underline"
                     >
                       <Upload className="h-3.5 w-3.5" /> Upload .html file
                     </button>
-                    <span className="text-slate-600">·</span>
+                    <span className="text-zinc-600">·</span>
                     <button
                       type="button"
                       onClick={loadSampleCourseHtml}
-                      className="flex items-center gap-1 text-xs text-amber-300 transition hover:text-amber-200 hover:underline"
+                      className="flex items-center gap-1 text-xs text-zinc-400 transition hover:text-zinc-200 hover:underline"
                     >
-                      <Sparkles className="h-3.5 w-3.5" /> Load sample course HTML
+                      <FileCode className="h-3.5 w-3.5 text-zinc-400" /> Load sample course HTML
                     </button>
                   </div>
                 </div>
@@ -1492,19 +1491,19 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
 
               {/* Status messages */}
               {importError ? (
-                <p className="rounded-xl border border-rose-400/30 bg-rose-500/10 px-4 py-2.5 text-sm text-rose-200" role="alert">
+                <p className="rounded-lg border border-rose-950/80 bg-rose-950/30 px-4 py-2.5 text-sm text-rose-300" role="alert">
                   {importError}
                 </p>
               ) : null}
 
               {importSuccess ? (
-                <p className="flex items-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-2.5 text-sm text-emerald-200" role="alert">
+                <p className="flex items-center gap-2 rounded-lg border border-emerald-900/60 bg-emerald-950/40 px-4 py-2.5 text-sm text-emerald-300" role="alert">
                   <CheckCircle2 className="h-4 w-4" /> {importSuccess}
                 </p>
               ) : null}
 
               {/* Action buttons */}
-              <div className="flex items-center justify-between border-t border-white/10 pt-4">
+              <div className="flex items-center justify-between border-t border-zinc-800 pt-4">
                 <button
                   type="button"
                   onClick={() => setImportModalOpen(false)}
@@ -1517,10 +1516,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                   type="button"
                   onClick={runImport}
                   disabled={importing || !importForm.html.trim()}
-                  className={buttonClass(
-                    "primary",
-                    "bg-gradient-to-r from-amber-500 to-indigo-600 font-semibold shadow-lg shadow-amber-500/20",
-                  )}
+                  className={buttonClass("primary")}
                 >
                   {importing ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileCode className="h-4 w-4" />}
                   {importing ? "Ingesting & Sanitizing…" : "Ingest Course HTML into Database"}

@@ -93,10 +93,10 @@ export default function NotesClient({ initial }: { initial: NoteRow[] }) {
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">
-      <header className="animate-fade-up">
-        <p className="text-xs font-semibold uppercase tracking-wider text-indigo-300">Notes</p>
+      <header>
+        <p className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Notes</p>
         <h1 className="mt-1 text-3xl font-bold tracking-tight text-white">Everything you wrote down</h1>
-        <p className="mt-1.5 text-sm text-slate-400">Notes taken inside a lesson link back to it. Pin the ones you want on top.</p>
+        <p className="mt-1.5 text-sm text-zinc-400">Notes taken inside a lesson link back to it. Pin the ones you want on top.</p>
       </header>
 
       <div className="panel space-y-3 p-5">
@@ -110,7 +110,7 @@ export default function NotesClient({ initial }: { initial: NoteRow[] }) {
       </div>
 
       <div className="relative">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
         <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Filter notes…" className={`${inputClass} pl-9`} />
       </div>
 
@@ -127,7 +127,7 @@ export default function NotesClient({ initial }: { initial: NoteRow[] }) {
       ) : (
         <ul className="space-y-3">
           {filtered.map((note) => (
-            <li key={note.id} className={`panel p-4 ${note.pinned ? "ring-1 ring-amber-400/25" : ""}`}>
+            <li key={note.id} className={`panel p-4 ${note.pinned ? "border-amber-900/60 bg-amber-950/20" : ""}`}>
               <div className="flex flex-wrap items-start gap-3">
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
@@ -135,17 +135,17 @@ export default function NotesClient({ initial }: { initial: NoteRow[] }) {
                     {note.pinned ? <Badge tone="amber">pinned</Badge> : null}
                   </div>
                   {note.lessonSlug && note.courseSlug ? (
-                    <Link href={`/courses/${note.courseSlug}/${note.lessonSlug}`} className="mt-0.5 inline-block text-[11px] text-indigo-300 hover:underline">
+                    <Link href={`/courses/${note.courseSlug}/${note.lessonSlug}`} className="mt-0.5 inline-block text-[11px] text-zinc-400 hover:text-white hover:underline">
                       {note.courseTitle} · {note.lessonTitle}
                     </Link>
                   ) : (
-                    <p className="mt-0.5 text-[11px] text-slate-500">Standalone note</p>
+                    <p className="mt-0.5 text-[11px] text-zinc-500">Standalone note</p>
                   )}
                 </div>
                 <div className="flex shrink-0 items-center gap-1">
                   <button
                     onClick={() => patch(note.id, { pinned: !note.pinned })}
-                    className="focus-ring rounded-lg p-1.5 text-slate-400 hover:bg-white/10 hover:text-amber-200"
+                    className="focus-ring rounded-md p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-amber-300"
                     title={note.pinned ? "Unpin" : "Pin"}
                   >
                     {note.pinned ? <PinOff className="h-4 w-4" /> : <Pin className="h-4 w-4" />}
@@ -155,12 +155,12 @@ export default function NotesClient({ initial }: { initial: NoteRow[] }) {
                       setEditingId(editingId === note.id ? null : note.id);
                       setEditBody(note.body);
                     }}
-                    className="focus-ring rounded-lg p-1.5 text-slate-400 hover:bg-white/10 hover:text-slate-100"
+                    className="focus-ring rounded-md p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100"
                     title="Edit"
                   >
                     <Pencil className="h-4 w-4" />
                   </button>
-                  <button onClick={() => remove(note.id)} className="focus-ring rounded-lg p-1.5 text-slate-400 hover:bg-white/10 hover:text-rose-300" title="Delete">
+                  <button onClick={() => remove(note.id)} className="focus-ring rounded-md p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-rose-400" title="Delete">
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
@@ -185,10 +185,10 @@ export default function NotesClient({ initial }: { initial: NoteRow[] }) {
                   </div>
                 </div>
               ) : (
-                <p className="mt-2 whitespace-pre-wrap text-[13.5px] leading-6 text-slate-300">{note.body}</p>
+                <p className="mt-2 whitespace-pre-wrap text-[13.5px] leading-6 text-zinc-300">{note.body}</p>
               )}
 
-              <p className="mt-2 text-[11px] text-slate-500">Updated {relativeTime(note.updatedAt)}</p>
+              <p className="mt-2 text-[11px] text-zinc-500">Updated {relativeTime(note.updatedAt)}</p>
             </li>
           ))}
         </ul>

@@ -47,14 +47,14 @@ export function CompleteButton({
     }
   }
 
-  const pad = size === "sm" ? "px-2.5 py-1.5 text-[11px]" : "px-3.5 py-2 text-sm";
+  const pad = size === "sm" ? "px-2.5 py-1 text-[11px]" : "px-3 py-1.5 text-xs";
 
   return (
     <button
       onClick={toggle}
       disabled={pending}
-      className={`focus-ring inline-flex shrink-0 items-center gap-1.5 rounded-xl font-semibold transition disabled:opacity-60 ${pad} ${
-        done ? "bg-emerald-500/15 text-emerald-200 ring-1 ring-emerald-400/30" : "border border-white/15 bg-white/5 text-slate-200 hover:bg-white/10"
+      className={`focus-ring inline-flex shrink-0 items-center gap-1.5 rounded-md font-medium transition disabled:opacity-60 ${pad} ${
+        done ? "border border-emerald-800/80 bg-emerald-950/40 text-emerald-200" : "border border-zinc-800 bg-zinc-900/70 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-800/60"
       }`}
       aria-pressed={done}
     >
@@ -93,8 +93,8 @@ export function BookmarkButton({ lessonId, initial, withLabel = false }: { lesso
       onClick={toggle}
       disabled={pending}
       title={saved ? "Remove from saved" : "Save for later"}
-      className={`focus-ring inline-flex shrink-0 items-center gap-1.5 rounded-xl px-2.5 py-2 text-xs font-semibold transition disabled:opacity-60 ${
-        saved ? "bg-amber-400/15 text-amber-200 ring-1 ring-amber-400/30" : "border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10"
+      className={`focus-ring inline-flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition disabled:opacity-60 ${
+        saved ? "border border-amber-800/80 bg-amber-950/40 text-amber-200" : "border border-zinc-800 bg-zinc-900/70 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-800/60"
       }`}
     >
       {pending ? (
@@ -164,24 +164,24 @@ export function LessonTree({ modules, courseSlug }: { modules: TreeModule[]; cou
         const open = openIds.includes(mod.id);
         return (
           <div key={mod.id} className="panel overflow-hidden">
-            <button onClick={() => toggleModule(mod.id)} className="focus-ring flex w-full items-center gap-3 px-4 py-4 text-left hover:bg-white/[0.03]">
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-white/5 text-xs font-bold text-slate-300">{i + 1}</span>
+            <button onClick={() => toggleModule(mod.id)} className="focus-ring flex w-full items-center gap-3 px-4 py-3.5 text-left hover:bg-zinc-800/40">
+              <span className="grid h-7 w-7 shrink-0 place-items-center rounded border border-zinc-800 bg-zinc-900 text-xs font-semibold text-zinc-300">{i + 1}</span>
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-sm font-semibold text-white">{mod.title}</span>
-                <span className="block truncate text-xs text-slate-500">{mod.summary || `${mod.lessons.length} lessons`}</span>
+                <span className="block truncate text-xs text-zinc-500">{mod.summary || `${mod.lessons.length} lessons`}</span>
               </span>
-              <span className="shrink-0 text-[11px] font-semibold tabular-nums text-slate-400">
+              <span className="shrink-0 text-[11px] font-semibold tabular-nums text-zinc-400">
                 {done}/{mod.lessons.length}
               </span>
-              <ChevronDown className={`h-4 w-4 shrink-0 text-slate-500 transition ${open ? "rotate-180" : ""}`} />
+              <ChevronDown className={`h-4 w-4 shrink-0 text-zinc-500 transition ${open ? "rotate-180" : ""}`} />
             </button>
 
             {open ? (
-              <ul className="animate-fade-up divide-y divide-white/5 border-t border-white/5">
+              <ul className="divide-y divide-zinc-800/60 border-t border-zinc-800/60">
                 {mod.lessons.map((lesson) => {
                   const status = overrides[lesson.id] ?? lesson.status;
                   return (
-                    <li key={lesson.id} className="flex items-center gap-3 px-4 py-3 transition hover:bg-white/[0.03]">
+                    <li key={lesson.id} className="flex items-center gap-3 px-4 py-2.5 transition hover:bg-zinc-800/30">
                       <button
                         onClick={() => toggleDone(lesson)}
                         disabled={pendingId === lesson.id}
@@ -190,24 +190,24 @@ export function LessonTree({ modules, courseSlug }: { modules: TreeModule[]; cou
                         aria-label={status === "completed" ? "Mark incomplete" : "Mark complete"}
                       >
                         {pendingId === lesson.id ? (
-                          <Loader2 className="h-4 w-4 animate-spin text-slate-400" />
+                          <Loader2 className="h-4 w-4 animate-spin text-zinc-500" />
                         ) : status === "completed" ? (
                           <CheckCircle2 className="h-4.5 w-4.5 text-emerald-400" />
                         ) : (
-                          <Circle className="h-4.5 w-4.5 text-slate-600" />
+                          <Circle className="h-4.5 w-4.5 text-zinc-600" />
                         )}
                       </button>
                       <Link href={`/courses/${courseSlug}/${lesson.slug}`} className="min-w-0 flex-1">
-                        <span className={`block truncate text-sm ${status === "completed" ? "text-slate-400 line-through decoration-slate-600" : "text-slate-200"}`}>
+                        <span className={`block truncate text-sm ${status === "completed" ? "text-zinc-500 line-through decoration-zinc-700" : "text-zinc-200"}`}>
                           {lesson.title}
                         </span>
-                        <span className="flex items-center gap-2 text-[11px] text-slate-500">
+                        <span className="flex items-center gap-2 text-[11px] text-zinc-500">
                           <Clock className="h-3 w-3" /> {minutesLabel(lesson.minutes)}
-                          <span className="rounded bg-white/5 px-1.5 py-0.5 capitalize">{lesson.kind}</span>
-                          {lesson.draft ? <span className="rounded bg-amber-400/15 px-1.5 py-0.5 text-amber-200">draft</span> : null}
+                          <span className="rounded border border-zinc-800 bg-zinc-900 px-1.5 py-0.5 text-[10px] capitalize text-zinc-400">{lesson.kind}</span>
+                          {lesson.draft ? <span className="rounded border border-amber-900/60 bg-amber-950/40 px-1.5 py-0.5 text-[10px] text-amber-300">draft</span> : null}
                         </span>
                       </Link>
-                      {lesson.bookmarked ? <Bookmark className="h-3.5 w-3.5 shrink-0 text-amber-300/80" /> : null}
+                      {lesson.bookmarked ? <Bookmark className="h-3.5 w-3.5 shrink-0 text-amber-400/80" /> : null}
                       {status === "completed" ? <Check className="h-4 w-4 shrink-0 text-emerald-400/60" /> : null}
                     </li>
                   );

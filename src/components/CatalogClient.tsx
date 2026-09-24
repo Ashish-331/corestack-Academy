@@ -90,27 +90,27 @@ export default function CatalogClient({ courses, initialQuery = "" }: { courses:
 
   return (
     <div className="mx-auto max-w-6xl space-y-6">
-      <header className="animate-fade-up">
-        <p className="text-xs font-semibold uppercase tracking-wider text-indigo-300">Catalog</p>
+      <header>
+        <p className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Catalog</p>
         <h1 className="mt-1 text-3xl font-bold tracking-tight text-white">Every course in the library</h1>
-        <p className="mt-1.5 max-w-2xl text-sm text-slate-400">
+        <p className="mt-1.5 max-w-2xl text-sm text-zinc-400">
           Search across course and lesson titles, then jump straight into the lesson that matched.
         </p>
       </header>
 
       <div className="panel flex flex-col gap-3 p-4 sm:flex-row sm:items-center">
         <div className="relative flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
           <input
             value={q}
             onChange={(e) => updateQuery(e.target.value)}
             placeholder="Try “deadlock”, “B+ tree”, “sliding window”, “TLS”…"
-            className="w-full rounded-xl border border-white/10 bg-slate-900/60 py-2.5 pl-9 pr-9 text-sm text-slate-100 placeholder:text-slate-500 focus-ring focus:border-indigo-400/60"
+            className="w-full rounded-md border border-zinc-800 bg-zinc-900/70 py-2 pl-9 pr-9 text-sm text-zinc-100 placeholder:text-zinc-500 focus-ring focus:border-zinc-600"
           />
           {loading ? (
-            <Loader2 className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-slate-500" />
+            <Loader2 className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-zinc-500" />
           ) : q ? (
-            <button onClick={() => updateQuery("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-lg p-1 text-slate-500 hover:text-slate-200" aria-label="Clear search">
+            <button onClick={() => updateQuery("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-zinc-500 hover:text-zinc-200" aria-label="Clear search">
               <X className="h-4 w-4" />
             </button>
           ) : null}
@@ -120,8 +120,8 @@ export default function CatalogClient({ courses, initialQuery = "" }: { courses:
             <button
               key={c}
               onClick={() => setCategory(c)}
-              className={`focus-ring rounded-xl px-3 py-2 text-xs font-semibold transition ${
-                category === c ? "bg-indigo-500/20 text-indigo-100 ring-1 ring-indigo-400/30" : "border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10"
+              className={`focus-ring rounded-md px-3 py-1.5 text-xs font-medium transition ${
+                category === c ? "border border-zinc-700 bg-zinc-800 text-zinc-100" : "border border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200"
               }`}
             >
               {c}
@@ -132,11 +132,11 @@ export default function CatalogClient({ courses, initialQuery = "" }: { courses:
 
       {q.trim().length >= 2 && hits ? (
         <section className="panel p-5">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">
             {hits.length} matching lesson{hits.length === 1 ? "" : "s"} for “{q.trim()}”
           </h2>
           {hits.length === 0 ? (
-            <p className="mt-3 text-sm text-slate-500">No lesson titles matched. Try a shorter term.</p>
+            <p className="mt-3 text-sm text-zinc-500">No lesson titles matched. Try a shorter term.</p>
           ) : (
             <ul className="mt-3 grid gap-2 md:grid-cols-2">
               {hits.map((l) => (
@@ -145,10 +145,10 @@ export default function CatalogClient({ courses, initialQuery = "" }: { courses:
                     href={`/courses/${l.courseSlug}/${l.slug}`}
                     className="panel panel-hover flex items-start gap-3 p-3"
                   >
-                    <CourseGlyph icon="book-open" accent={l.accent} size="sm" />
+                    <CourseGlyph icon="book-open" size="sm" />
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-medium text-slate-100">{l.title}</span>
-                      <span className="block truncate text-[11px] text-slate-500">
+                      <span className="block truncate text-sm font-medium text-zinc-100">{l.title}</span>
+                      <span className="block truncate text-[11px] text-zinc-500">
                         {l.courseTitle} · {minutesLabel(l.minutes)} · {l.kind}
                       </span>
                     </span>
@@ -165,7 +165,7 @@ export default function CatalogClient({ courses, initialQuery = "" }: { courses:
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[0, 1, 2, 3, 4, 5].map((i) => (
             <div key={i} className="panel space-y-3 p-5">
-              <SkeletonBlock className="h-10 w-10 rounded-xl" />
+              <SkeletonBlock className="h-10 w-10 rounded-md" />
               <SkeletonBlock className="h-4 w-3/4" />
               <SkeletonBlock className="h-3 w-full" />
               <SkeletonBlock className="h-3 w-2/3" />
@@ -183,7 +183,7 @@ export default function CatalogClient({ courses, initialQuery = "" }: { courses:
                 updateQuery("");
                 setCategory("All");
               }}
-              className="rounded-xl bg-indigo-500 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-400"
+              className="rounded-md border border-zinc-800 bg-zinc-100 px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-white"
             >
               Reset filters
             </button>
@@ -192,19 +192,19 @@ export default function CatalogClient({ courses, initialQuery = "" }: { courses:
       ) : (
         <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {visible.map((c) => (
-            <Link key={c.slug} href={`/courses/${c.slug}`} className="panel panel-hover animate-fade-up flex flex-col p-5">
+            <Link key={c.slug} href={`/courses/${c.slug}`} className="panel panel-hover flex flex-col p-5">
               <div className="flex items-center gap-3">
-                <CourseGlyph icon={c.icon} accent={c.accent} />
+                <CourseGlyph icon={c.icon} />
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold text-white">{c.title}</p>
-                  <p className="text-[11px] uppercase tracking-wider text-slate-500">
+                  <p className="text-[11px] uppercase tracking-wider text-zinc-500">
                     {c.category} · {c.level}
                   </p>
                 </div>
               </div>
-              <p className="mt-4 flex-1 text-[13px] leading-6 text-slate-400">{c.tagline}</p>
+              <p className="mt-4 flex-1 text-[13px] leading-6 text-zinc-400">{c.tagline}</p>
               <div className="mt-4">
-                <div className="mb-1.5 flex items-center justify-between text-[11px] text-slate-500">
+                <div className="mb-1.5 flex items-center justify-between text-[11px] text-zinc-500">
                   <span>
                     {c.completed}/{c.lessons} lessons
                   </span>

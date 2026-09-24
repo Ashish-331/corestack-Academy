@@ -17,23 +17,23 @@ export function Card({
 
 export function Badge({ children, tone = "slate" }: { children: ReactNode; tone?: "slate" | "indigo" | "emerald" | "amber" | "rose" }) {
   const tones: Record<string, string> = {
-    slate: "border-white/10 bg-white/5 text-slate-300",
-    indigo: "border-indigo-400/30 bg-indigo-400/10 text-indigo-200",
-    emerald: "border-emerald-400/30 bg-emerald-400/10 text-emerald-200",
-    amber: "border-amber-400/30 bg-amber-400/10 text-amber-200",
-    rose: "border-rose-400/30 bg-rose-400/10 text-rose-200",
+    slate: "border-zinc-800 bg-zinc-900 text-zinc-300",
+    indigo: "border-zinc-800 bg-zinc-900 text-zinc-300",
+    emerald: "border-emerald-900/60 bg-emerald-950/40 text-emerald-300",
+    amber: "border-amber-900/60 bg-amber-950/40 text-amber-300",
+    rose: "border-rose-900/60 bg-rose-950/40 text-rose-300",
   };
-  return <span className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold tracking-wide ${tones[tone]}`}>{children}</span>;
+  return <span className={`inline-flex items-center gap-1 rounded border px-2 py-0.5 text-[11px] font-medium tracking-wide ${tones[tone]}`}>{children}</span>;
 }
 
 export const buttonBase =
-  "inline-flex items-center justify-center gap-2 rounded-xl text-sm font-semibold transition focus-ring disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition focus-ring disabled:cursor-not-allowed disabled:opacity-60";
 
 export const buttonTones = {
-  primary: "bg-indigo-500 text-white hover:bg-indigo-400",
-  secondary: "border border-white/15 bg-white/5 text-slate-100 hover:bg-white/10",
-  ghost: "text-slate-300 hover:bg-white/10 hover:text-white",
-  danger: "border border-rose-400/30 bg-rose-500/10 text-rose-200 hover:bg-rose-500/20",
+  primary: "bg-zinc-100 text-zinc-950 hover:bg-white active:bg-zinc-200 font-semibold shadow-sm",
+  secondary: "border border-zinc-800 bg-zinc-900/70 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-800 hover:text-white",
+  ghost: "text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100",
+  danger: "border border-rose-950/80 bg-rose-950/30 text-rose-400 hover:bg-rose-900/40 hover:border-rose-800",
 } as const;
 
 export function buttonClass(tone: keyof typeof buttonTones = "primary", className = "") {
@@ -41,14 +41,15 @@ export function buttonClass(tone: keyof typeof buttonTones = "primary", classNam
 }
 
 export const inputClass =
-  "w-full rounded-xl border border-white/10 bg-slate-900/60 px-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 transition focus-ring focus:border-indigo-400/60";
+  "w-full rounded-md border border-zinc-800 bg-zinc-900/70 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-500 focus-ring focus:border-zinc-600";
 
 export function ProgressBar({ value, total, className = "" }: { value: number; total: number; className?: string }) {
   const pct = total > 0 ? Math.min(100, Math.round((value / total) * 100)) : 0;
+  const isComplete = pct === 100;
   return (
-    <div className={`h-2 w-full overflow-hidden rounded-full bg-white/10 ${className}`}>
+    <div className={`h-2 w-full overflow-hidden rounded-full bg-zinc-800 ${className}`}>
       <div
-        className="h-full rounded-full bg-gradient-to-r from-indigo-400 to-emerald-400 transition-[width] duration-500"
+        className={`h-full rounded-full transition-[width] duration-300 ${isComplete ? "bg-emerald-400/80" : "bg-zinc-200"}`}
         style={{ width: `${pct}%` }}
       />
     </div>
@@ -67,10 +68,10 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="animate-fade-up flex flex-col items-center justify-center rounded-2xl border border-dashed border-white/15 bg-white/[0.02] px-6 py-14 text-center">
-      {icon ? <div className="mb-4 grid h-12 w-12 place-items-center rounded-2xl bg-white/5 text-slate-300">{icon}</div> : null}
-      <h3 className="text-base font-semibold text-white">{title}</h3>
-      <p className="mt-1.5 max-w-md text-sm text-slate-400">{description}</p>
+    <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-zinc-800 bg-zinc-900/20 px-6 py-14 text-center">
+      {icon ? <div className="mb-4 grid h-10 w-10 place-items-center rounded-md border border-zinc-800 bg-zinc-900 text-zinc-400">{icon}</div> : null}
+      <h3 className="text-base font-semibold text-zinc-100">{title}</h3>
+      <p className="mt-1.5 max-w-md text-sm text-zinc-400">{description}</p>
       {action ? <div className="mt-5">{action}</div> : null}
     </div>
   );
@@ -85,40 +86,31 @@ export function StatCard({
   value,
   hint,
   icon,
-  tone = "indigo",
 }: {
   label: string;
   value: string | number;
   hint?: string;
   icon?: ReactNode;
-  tone?: "indigo" | "emerald" | "amber" | "violet";
 }) {
-  const rings: Record<string, string> = {
-    indigo: "from-indigo-500/20 text-indigo-200",
-    emerald: "from-emerald-500/20 text-emerald-200",
-    amber: "from-amber-500/20 text-amber-200",
-    violet: "from-violet-500/20 text-violet-200",
-  };
   return (
-    <div className="panel panel-hover relative overflow-hidden p-4">
-      <div className={`absolute inset-x-0 top-0 h-24 bg-gradient-to-b ${rings[tone].split(" ")[0]} to-transparent opacity-60`} />
-      <div className="relative flex items-start justify-between gap-3">
+    <div className="panel panel-hover p-4">
+      <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wider text-slate-400">{label}</p>
-          <p className="mt-1.5 text-2xl font-bold text-white tabular-nums">{value}</p>
-          {hint ? <p className="mt-1 text-xs text-slate-400">{hint}</p> : null}
+          <p className="text-xs font-medium uppercase tracking-wider text-zinc-400">{label}</p>
+          <p className="mt-1.5 text-2xl font-bold text-zinc-100 tabular-nums">{value}</p>
+          {hint ? <p className="mt-1 text-xs text-zinc-500">{hint}</p> : null}
         </div>
-        {icon ? <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/5 ${rings[tone].split(" ")[1]}`}>{icon}</div> : null}
+        {icon ? <div className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-zinc-800 bg-zinc-900 text-zinc-400">{icon}</div> : null}
       </div>
     </div>
   );
 }
 
-export function CourseGlyph({ icon, accent, size = "md" }: { icon: string; accent: string; size?: "sm" | "md" | "lg" }) {
-  const sizes = { sm: "h-8 w-8 text-sm", md: "h-11 w-11 text-base", lg: "h-14 w-14 text-xl" }[size];
+export function CourseGlyph({ icon, size = "md" }: { icon: string; accent?: string; size?: "sm" | "md" | "lg" }) {
+  const sizes = { sm: "h-8 w-8 text-xs", md: "h-10 w-10 text-sm", lg: "h-12 w-12 text-base" }[size];
   return (
-    <div className={`grid ${sizes} shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${accent} shadow-lg shadow-black/30`}>
-      <Icon name={icon} className="h-5 w-5 text-white" />
+    <div className={`grid ${sizes} shrink-0 place-items-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-300`}>
+      <Icon name={icon} className={size === "lg" ? "h-6 w-6 text-zinc-200" : size === "sm" ? "h-4 w-4 text-zinc-400" : "h-5 w-5 text-zinc-300"} />
     </div>
   );
 }
@@ -126,10 +118,10 @@ export function CourseGlyph({ icon, accent, size = "md" }: { icon: string; accen
 /* ───────────────────────────── icons ─────────────────────────────────── */
 
 import {
-  AlarmClock, ArrowLeftRight, ArrowRight, Binary, BookOpen, Boxes, Bookmark, BookmarkCheck, Brain,
+  AlarmClock, ArrowLeftRight, ArrowRight, Binary, BookOpen, Boxes, Bookmark, BookmarkCheck,
   Check, CheckCircle2, ChevronDown, ChevronRight, Circle, Clock, Cpu, Database, Flame, Globe,
   LayoutDashboard, Library, Loader2, NotebookPen, Pencil, Plus, Search, Server, ShieldCheck,
-  Sparkles, Target, Trash2, TrendingUp, Users, X,
+  Target, Trash2, TrendingUp, Users, X,
 } from "lucide-react";
 
 const ICONS = {
@@ -137,6 +129,7 @@ const ICONS = {
   database: Database,
   layers: Server,
   globe: Globe,
+  network: Globe,
   binary: Binary,
   boxes: Boxes,
   "book-open": BookOpen,
@@ -147,11 +140,9 @@ const ICONS = {
   flame: Flame,
   clock: AlarmClock,
   target: Target,
-  sparkles: Sparkles,
   shield: ShieldCheck,
   users: Users,
   trend: TrendingUp,
-  brain: Brain,
   server: Server,
 } as const;
 
@@ -163,9 +154,9 @@ export function Icon({ name, className = "h-4 w-4" }: { name: string; className?
 }
 
 export {
-  AlarmClock, ArrowLeftRight, ArrowRight, Binary, BookOpen, Bookmark, BookmarkCheck, Brain, Check,
+  AlarmClock, ArrowLeftRight, ArrowRight, Binary, BookOpen, Bookmark, BookmarkCheck, Check,
   CheckCircle2, ChevronDown, ChevronRight, Circle, Clock, Cpu, Database, Flame, Globe, LayoutDashboard,
-  Library, Loader2, NotebookPen, Pencil, Plus, Search, Server, ShieldCheck, Sparkles, Target, Trash2,
+  Library, Loader2, NotebookPen, Pencil, Plus, Search, Server, ShieldCheck, Target, Trash2,
   TrendingUp, Users, X,
 };
 

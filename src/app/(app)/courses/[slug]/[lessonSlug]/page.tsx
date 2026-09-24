@@ -45,23 +45,23 @@ export default async function LessonPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-6xl">
-      <nav className="mb-4 flex items-center gap-1.5 text-xs text-slate-500">
-        <Link href="/catalog" className="hover:text-slate-300">
+      <nav className="mb-4 flex items-center gap-1.5 text-xs text-zinc-500">
+        <Link href="/catalog" className="hover:text-zinc-300">
           Catalog
         </Link>
         <ChevronRight className="h-3 w-3" />
-        <Link href={`/courses/${course.slug}`} className="hover:text-slate-300">
+        <Link href={`/courses/${course.slug}`} className="hover:text-zinc-300">
           {course.title}
         </Link>
         <ChevronRight className="h-3 w-3" />
-        <span className="truncate text-slate-400">{mod.title}</span>
+        <span className="truncate text-zinc-400">{mod.title}</span>
       </nav>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_270px]">
         <article className="min-w-0">
-          <header className="panel animate-fade-up p-6">
+          <header className="panel p-6">
             <div className="flex flex-wrap items-center gap-2">
-              <Badge tone="indigo">{lesson.kind}</Badge>
+              <Badge tone="slate">{lesson.kind}</Badge>
               <Badge>{minutesLabel(lesson.minutes)}</Badge>
               {lesson.draft ? (
                 <Badge tone="amber">
@@ -70,12 +70,12 @@ export default async function LessonPage({ params }: Props) {
               ) : null}
             </div>
             <h1 className="mt-3 text-2xl font-bold tracking-tight text-white lg:text-3xl">{lesson.title}</h1>
-            <p className="mt-2 text-sm leading-6 text-slate-400">{lesson.summary}</p>
+            <p className="mt-2 text-sm leading-6 text-zinc-400">{lesson.summary}</p>
 
             <div className="mt-5 flex flex-wrap items-center gap-2">
               <CompleteButton lessonId={lesson.id} initialStatus={view.progress?.status ?? null} />
               <BookmarkButton lessonId={lesson.id} initial={view.bookmarked} withLabel />
-              <span className="ml-auto text-[11px] text-slate-500">
+              <span className="ml-auto text-[11px] text-zinc-500">
                 Lesson {view.index + 1} of {view.total} · {course.short}
               </span>
             </div>
@@ -84,15 +84,15 @@ export default async function LessonPage({ params }: Props) {
           {html.trim() ? (
             <div className="panel lesson mt-6 p-6 lg:p-8" dangerouslySetInnerHTML={{ __html: html }} />
           ) : (
-            <div className="panel mt-6 border-amber-400/25 bg-amber-400/[0.06] p-6">
-              <h2 className="flex items-center gap-2 text-base font-semibold text-amber-100">
+            <div className="panel mt-6 border border-amber-900/60 bg-amber-950/20 p-6">
+              <h2 className="flex items-center gap-2 text-base font-semibold text-amber-200">
                 <TriangleAlert className="h-4 w-4" /> This lesson has no authored material yet
               </h2>
-              <p className="mt-2 text-sm leading-6 text-amber-100/80">
+              <p className="mt-2 text-sm leading-6 text-amber-200/80">
                 It is marked as a draft, so you know it is a deliberate gap rather than a silent one. Authors can write it from the
                 Author studio.
               </p>
-              <Link href="/admin" className="mt-4 inline-block text-sm font-semibold text-amber-200 underline underline-offset-2">
+              <Link href="/admin" className="mt-4 inline-block text-sm font-semibold text-amber-300 underline underline-offset-2">
                 Open Author studio
               </Link>
             </div>
@@ -107,10 +107,10 @@ export default async function LessonPage({ params }: Props) {
           <nav className="mt-8 grid gap-3 sm:grid-cols-2">
             {prev ? (
               <Link href={`/courses/${course.slug}/${prev.slug}`} className="panel panel-hover flex items-center gap-3 p-4">
-                <ArrowLeft className="h-4 w-4 shrink-0 text-slate-500" />
+                <ArrowLeft className="h-4 w-4 shrink-0 text-zinc-500" />
                 <span className="min-w-0">
-                  <span className="block text-[11px] uppercase tracking-wider text-slate-500">Previous</span>
-                  <span className="block truncate text-sm font-medium text-slate-200">{prev.title}</span>
+                  <span className="block text-[11px] uppercase tracking-wider text-zinc-500">Previous</span>
+                  <span className="block truncate text-sm font-medium text-zinc-200">{prev.title}</span>
                 </span>
               </Link>
             ) : (
@@ -119,10 +119,10 @@ export default async function LessonPage({ params }: Props) {
             {next ? (
               <Link href={`/courses/${course.slug}/${next.slug}`} className="panel panel-hover flex items-center justify-end gap-3 p-4 text-right">
                 <span className="min-w-0">
-                  <span className="block text-[11px] uppercase tracking-wider text-slate-500">Next</span>
-                  <span className="block truncate text-sm font-medium text-slate-200">{next.title}</span>
+                  <span className="block text-[11px] uppercase tracking-wider text-zinc-500">Next</span>
+                  <span className="block truncate text-sm font-medium text-zinc-200">{next.title}</span>
                 </span>
-                <ArrowRight className="h-4 w-4 shrink-0 text-slate-500" />
+                <ArrowRight className="h-4 w-4 shrink-0 text-zinc-500" />
               </Link>
             ) : null}
           </nav>
@@ -131,21 +131,21 @@ export default async function LessonPage({ params }: Props) {
         <aside className="space-y-4 lg:sticky lg:top-24 lg:h-fit">
           <div className="panel p-5">
             <div className="flex items-center gap-3">
-              <CourseGlyph icon={course.icon} accent={course.accent} size="sm" />
+              <CourseGlyph icon={course.icon} size="sm" />
               <div className="min-w-0">
                 <Link href={`/courses/${course.slug}`} className="block truncate text-sm font-semibold text-white hover:underline">
                   {course.title}
                 </Link>
-                <p className="truncate text-[11px] text-slate-500">{mod.title}</p>
+                <p className="truncate text-[11px] text-zinc-500">{mod.title}</p>
               </div>
             </div>
             {toc.length ? (
               <>
-                <p className="mt-4 text-[11px] font-semibold uppercase tracking-wider text-slate-500">On this page</p>
+                <p className="mt-4 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">On this page</p>
                 <ul className="mt-2 space-y-1.5">
                   {toc.map((t) => (
                     <li key={t.id}>
-                      <a href={`#${t.id}`} className="block truncate text-[13px] text-slate-400 hover:text-indigo-200">
+                      <a href={`#${t.id}`} className="block truncate text-[13px] text-zinc-400 hover:text-zinc-100 hover:underline">
                         {t.text}
                       </a>
                     </li>
@@ -156,8 +156,8 @@ export default async function LessonPage({ params }: Props) {
           </div>
 
           <div className="panel p-5">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Quiz on this lesson</p>
-            <p className="mt-1.5 text-sm text-slate-300">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500">Quiz on this lesson</p>
+            <p className="mt-1.5 text-sm text-zinc-300">
               {view.quizzes.length ? `${view.quizzes.length} questions · answers are saved` : "No quiz for this lesson"}
             </p>
           </div>

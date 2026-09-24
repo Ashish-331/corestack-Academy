@@ -17,7 +17,7 @@ export default async function AdminLoginPage() {
     <main className="flex min-h-dvh flex-col items-center justify-center px-6 py-12">
       <div className="mb-6">
         <Link href="/" className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 font-black text-white">
+          <span className="grid h-10 w-10 place-items-center rounded-md border border-zinc-800 bg-zinc-900 font-bold text-zinc-100">
             CS
           </span>
           <span className="text-lg font-bold tracking-tight text-white">CoreStack Academy</span>

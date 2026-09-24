@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, KeyRound, Loader2, Lock, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, KeyRound, Loader2, Lock, ShieldCheck } from "lucide-react";
 import { Badge, buttonClass, inputClass } from "@/components/ui";
 
 export default function AdminLoginForm() {
@@ -54,27 +54,27 @@ export default function AdminLoginForm() {
 
   return (
     <div className="w-full max-w-md">
-      <div className="panel animate-fade-up border-amber-400/20 bg-slate-900/70 p-7 shadow-2xl backdrop-blur-md">
+      <div className="panel p-7">
         {/* Header with Icon & Role Badges */}
         <div className="flex items-center justify-between">
-          <div className="grid h-12 w-12 place-items-center rounded-2xl border border-amber-400/30 bg-amber-500/10 text-amber-300 shadow-inner">
-            <Lock className="h-6 w-6" />
+          <div className="grid h-12 w-12 place-items-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-200">
+            <Lock className="h-5 w-5" />
           </div>
-          <span className="flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-xs font-semibold text-amber-300">
-            <ShieldCheck className="h-3.5 w-3.5" /> Author Studio
+          <span className="flex items-center gap-1.5 rounded border border-zinc-800 bg-zinc-900 px-2.5 py-1 text-xs font-medium text-zinc-300">
+            <ShieldCheck className="h-3.5 w-3.5 text-zinc-400" /> Author Studio
           </span>
         </div>
 
         <h1 className="mt-5 text-2xl font-bold tracking-tight text-white">Admin & Author Sign In</h1>
-        <p className="mt-1.5 text-sm text-slate-400">
+        <p className="mt-1.5 text-sm text-zinc-400">
           Enter administrative credentials to manage course curricula, import HTML, and edit catalog lessons.
         </p>
 
         {/* Role Badges */}
         <div className="mt-4 flex flex-wrap items-center gap-2">
-          <Badge tone="amber">Author Privileges</Badge>
-          <Badge tone="indigo">Curriculum Editor</Badge>
-          <Badge tone="indigo">HTML Ingestion</Badge>
+          <Badge>Author Privileges</Badge>
+          <Badge>Curriculum Editor</Badge>
+          <Badge>HTML Ingestion</Badge>
         </div>
 
         {/* Form */}
@@ -82,7 +82,7 @@ export default function AdminLoginForm() {
           <div>
             <label
               htmlFor="admin-email"
-              className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-400"
+              className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-zinc-400"
             >
               Admin Email
             </label>
@@ -100,7 +100,7 @@ export default function AdminLoginForm() {
           <div>
             <label
               htmlFor="admin-password"
-              className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-400"
+              className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-zinc-400"
             >
               Password
             </label>
@@ -117,7 +117,7 @@ export default function AdminLoginForm() {
 
           {error ? (
             <p
-              className="rounded-xl border border-rose-400/30 bg-rose-500/10 px-3.5 py-2.5 text-sm text-rose-200"
+              className="rounded-lg border border-rose-950/80 bg-rose-950/30 px-3.5 py-2.5 text-sm text-rose-300"
               role="alert"
             >
               {error}
@@ -127,10 +127,7 @@ export default function AdminLoginForm() {
           <button
             type="submit"
             disabled={busy}
-            className={buttonClass(
-              "primary",
-              "w-full py-2.5 bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-400 hover:to-indigo-500 font-semibold shadow-lg shadow-amber-500/20",
-            )}
+            className={buttonClass("primary", "w-full py-2.5")}
           >
             {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <KeyRound className="h-4 w-4" />}
             {busy ? "Authenticating…" : "Sign In to Admin Studio"}
@@ -139,29 +136,29 @@ export default function AdminLoginForm() {
         </form>
 
         {/* 1-Click Fill Demo Credentials */}
-        <div className="mt-5 border-t border-white/10 pt-4">
+        <div className="mt-5 border-t border-zinc-800 pt-4">
           <button
             type="button"
             onClick={fillDemoAdmin}
-            className="focus-ring flex w-full items-center justify-between rounded-xl border border-amber-400/30 bg-amber-400/5 px-3.5 py-2.5 text-left text-xs font-medium text-amber-200 transition hover:bg-amber-400/15"
+            className="focus-ring flex w-full items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/60 px-3.5 py-2.5 text-left text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800/60"
           >
             <span className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-amber-300" />
+              <KeyRound className="h-4 w-4 text-zinc-400" />
               <span>
-                <strong className="text-white">1-Click Fill Demo Admin</strong>
-                <span className="block text-[11px] text-amber-300/80">author@corestack.dev / corestack123</span>
+                <strong className="text-zinc-100">1-Click Fill Demo Admin</strong>
+                <span className="block text-[11px] text-zinc-400">author@corestack.dev / corestack123</span>
               </span>
             </span>
-            <span className="rounded-lg bg-amber-400/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-200">
+            <span className="rounded border border-zinc-700 bg-zinc-800 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-zinc-300">
               Auto-fill
             </span>
           </button>
         </div>
 
         {/* Learner return link */}
-        <p className="mt-5 text-center text-xs text-slate-400">
+        <p className="mt-5 text-center text-xs text-zinc-500">
           Looking for student dashboard?{" "}
-          <Link href="/login" className="font-semibold text-indigo-300 transition hover:text-indigo-200">
+          <Link href="/login" className="font-medium text-zinc-300 underline underline-offset-2 transition hover:text-white">
             Learner sign in
           </Link>
         </p>
