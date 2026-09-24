@@ -315,8 +315,15 @@ async function seedLearners(lessonIds: Map<string, number>, courseIds: Map<strin
 }
 
 async function runSeed() {
-  // Serialise seeding across concurrent requests / instances.
-  await db.execute(sql`select pg_advisory_lock(918273465)`);
+  // Serialise seeding across concurrent requests / instances if supported by the pooler.
+  let hasLock = false;
+  try {
+    await db.execute(sql`select pg_advisory_lock(918273465)`);
+    hasLock = true;
+  } catch {
+    // Transaction poolers disallow session-level advisory locks; proceed safely
+  }
+
   try {
     const existing = await db.select({ id: coursesTable.id }).from(coursesTable).limit(1);
     if (existing.length) return;
@@ -324,7 +331,9 @@ async function runSeed() {
     const { lessonIds, courseIds } = await seedCatalog();
     await seedLearners(lessonIds, courseIds);
   } finally {
-    await db.execute(sql`select pg_advisory_unlock(918273465)`).catch(() => undefined);
+    if (hasLock) {
+      await db.execute(sql`select pg_advisory_unlock(918273465)`).catch(() => undefined);
+    }
   }
 }
 
