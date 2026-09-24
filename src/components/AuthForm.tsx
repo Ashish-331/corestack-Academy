@@ -37,11 +37,11 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
 
   return (
     <div className="w-full max-w-md">
-      <div className="panel p-7">
-        <h1 className="text-2xl font-bold tracking-tight text-white">
+      <div className="panel p-5 sm:p-7">
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white leading-tight">
           {isLogin ? "Welcome back to CoreStack Academy" : "Create your CoreStack Academy account"}
         </h1>
-        <p className="mt-1.5 text-sm text-zinc-400">
+        <p className="mt-1.5 text-xs sm:text-sm text-zinc-400">
           {isLogin
             ? "Pick up exactly where you left off — progress, notes and quiz answers are waiting."
             : "Track every lesson, save notes inline and keep quiz history across devices."}
@@ -81,14 +81,14 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
             </p>
           ) : null}
 
-          <button type="submit" disabled={busy} className={buttonClass("primary", "w-full py-2.5")}>
+          <button type="submit" disabled={busy} className={buttonClass("primary", "w-full py-2.5 min-h-[44px]")}>
             {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
             {isLogin ? "Sign in" : "Create account"}
             {!busy ? <ArrowRight className="h-4 w-4" /> : null}
           </button>
         </form>
 
-        <p className="mt-5 text-center text-sm text-zinc-400">
+        <p className="mt-5 text-center text-xs sm:text-sm text-zinc-400">
           {isLogin ? (
             <>
               New here?{" "}
@@ -130,12 +130,14 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
               setPassword("corestack123");
               if (!isLogin) setName("Riya Sharma");
             }}
-            className="focus-ring flex items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/60 px-3 py-2.5 text-left text-sm text-zinc-200 hover:border-zinc-700 hover:bg-zinc-800/60"
+            className="focus-ring flex flex-col xs:flex-row xs:items-center justify-between gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900/60 p-3 text-left text-xs sm:text-sm text-zinc-200 hover:border-zinc-700 hover:bg-zinc-800/60 active:scale-[0.99]"
           >
-            <span>
+            <span className="min-w-0">
               <span className="font-medium text-zinc-100">Learner</span> · demo@corestack.dev
             </span>
-            <span className="text-[11px] text-zinc-400">33 lessons done</span>
+            <span className="self-start xs:self-center shrink-0 text-[10px] text-zinc-400 rounded bg-zinc-800 px-1.5 py-0.5 border border-zinc-700/60">
+              33 lessons done
+            </span>
           </button>
           <button
             type="button"
@@ -144,12 +146,14 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
               setPassword("corestack123");
               if (!isLogin) setName("Ashish Kumar");
             }}
-            className="focus-ring flex items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/60 px-3 py-2.5 text-left text-sm text-zinc-200 hover:border-zinc-700 hover:bg-zinc-800/60"
+            className="focus-ring flex flex-col xs:flex-row xs:items-center justify-between gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900/60 p-3 text-left text-xs sm:text-sm text-zinc-200 hover:border-zinc-700 hover:bg-zinc-800/60 active:scale-[0.99]"
           >
-            <span>
+            <span className="min-w-0">
               <span className="font-medium text-zinc-100">Author / admin</span> · author@corestack.dev
             </span>
-            <span className="text-[11px] text-zinc-400">can edit catalog</span>
+            <span className="self-start xs:self-center shrink-0 text-[10px] text-zinc-400 rounded bg-zinc-800 px-1.5 py-0.5 border border-zinc-700/60">
+              can edit catalog
+            </span>
           </button>
           <p className="text-center text-[11px] text-zinc-500">Password for both: corestack123</p>
         </div>

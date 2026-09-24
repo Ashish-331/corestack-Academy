@@ -47,18 +47,18 @@ export function CompleteButton({
     }
   }
 
-  const pad = size === "sm" ? "px-2.5 py-1 text-[11px]" : "px-3 py-1.5 text-xs";
+  const pad = size === "sm" ? "px-2.5 py-1.5 text-xs min-h-[36px]" : "px-3.5 py-2 text-xs sm:text-sm min-h-[42px]";
 
   return (
     <button
       onClick={toggle}
       disabled={pending}
-      className={`focus-ring inline-flex shrink-0 items-center gap-1.5 rounded-md font-medium transition disabled:opacity-60 ${pad} ${
+      className={`focus-ring inline-flex shrink-0 items-center justify-center gap-2 rounded-lg font-medium transition active:scale-[0.99] touch-manipulation disabled:opacity-60 ${pad} ${
         done ? "border border-emerald-800/80 bg-emerald-950/40 text-emerald-200" : "border border-zinc-800 bg-zinc-900/70 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-800/60"
       }`}
       aria-pressed={done}
     >
-      {pending ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : done ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Circle className="h-3.5 w-3.5" />}
+      {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : done ? <CheckCircle2 className="h-4 w-4 text-emerald-400" /> : <Circle className="h-4 w-4" />}
       {labels ? (done ? "Completed" : "Mark complete") : null}
     </button>
   );
@@ -93,16 +93,16 @@ export function BookmarkButton({ lessonId, initial, withLabel = false }: { lesso
       onClick={toggle}
       disabled={pending}
       title={saved ? "Remove from saved" : "Save for later"}
-      className={`focus-ring inline-flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition disabled:opacity-60 ${
+      className={`focus-ring inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs sm:text-sm font-medium transition active:scale-[0.99] touch-manipulation min-h-[42px] disabled:opacity-60 ${
         saved ? "border border-amber-800/80 bg-amber-950/40 text-amber-200" : "border border-zinc-800 bg-zinc-900/70 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-800/60"
       }`}
     >
       {pending ? (
-        <Loader2 className="h-3.5 w-3.5 animate-spin" />
+        <Loader2 className="h-4 w-4 animate-spin" />
       ) : saved ? (
-        <BookmarkCheck className="h-3.5 w-3.5" />
+        <BookmarkCheck className="h-4 w-4 text-amber-400" />
       ) : (
-        <Bookmark className="h-3.5 w-3.5" />
+        <Bookmark className="h-4 w-4" />
       )}
       {withLabel ? (saved ? "Saved" : "Save") : null}
     </button>
@@ -181,12 +181,12 @@ export function LessonTree({ modules, courseSlug }: { modules: TreeModule[]; cou
                 {mod.lessons.map((lesson) => {
                   const status = overrides[lesson.id] ?? lesson.status;
                   return (
-                    <li key={lesson.id} className="flex items-center gap-3 px-4 py-2.5 transition hover:bg-zinc-800/30">
+                    <li key={lesson.id} className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 transition hover:bg-zinc-800/30">
                       <button
                         onClick={() => toggleDone(lesson)}
                         disabled={pendingId === lesson.id}
                         title={status === "completed" ? "Mark as not done" : "Mark complete"}
-                        className="focus-ring shrink-0 disabled:opacity-50"
+                        className="focus-ring flex h-10 w-10 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-lg hover:bg-zinc-800 active:bg-zinc-700 disabled:opacity-50 touch-manipulation"
                         aria-label={status === "completed" ? "Mark incomplete" : "Mark complete"}
                       >
                         {pendingId === lesson.id ? (
@@ -197,7 +197,7 @@ export function LessonTree({ modules, courseSlug }: { modules: TreeModule[]; cou
                           <Circle className="h-4.5 w-4.5 text-zinc-600" />
                         )}
                       </button>
-                      <Link href={`/courses/${courseSlug}/${lesson.slug}`} className="min-w-0 flex-1">
+                      <Link href={`/courses/${courseSlug}/${lesson.slug}`} className="min-w-0 flex-1 py-1">
                         <span className={`block truncate text-sm ${status === "completed" ? "text-zinc-500 line-through decoration-zinc-700" : "text-zinc-200"}`}>
                           {lesson.title}
                         </span>

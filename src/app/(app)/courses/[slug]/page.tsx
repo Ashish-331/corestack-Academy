@@ -35,18 +35,18 @@ export default async function CourseDetailPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-5xl">
-      <header className="panel p-6 lg:p-8">
+      <header className="panel p-4 sm:p-6 lg:p-8">
         <div>
-          <div className="flex flex-wrap items-start gap-5">
+          <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5">
             <CourseGlyph icon={course.icon} size="lg" />
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge>{course.category}</Badge>
                 <Badge>{course.level}</Badge>
               </div>
-              <h1 className="mt-2 text-3xl font-bold tracking-tight text-white">{course.title}</h1>
-              <p className="mt-2 max-w-2xl text-[15px] leading-7 text-zinc-300">{course.description}</p>
-              <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-zinc-400">
+              <h1 className="mt-2 text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight">{course.title}</h1>
+              <p className="mt-2 max-w-2xl text-xs sm:text-[15px] leading-6 sm:leading-7 text-zinc-300">{course.description}</p>
+              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-zinc-400">
                 <span className="inline-flex items-center gap-1.5">
                   <Target className="h-3.5 w-3.5" /> {all.length} lessons · {outline.length} modules
                 </span>
@@ -60,7 +60,7 @@ export default async function CourseDetailPage({ params }: Props) {
             </div>
           </div>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
+          <div className="mt-6 flex flex-col sm:grid sm:grid-cols-[1fr_auto] gap-4 sm:items-center">
             <div>
               <div className="mb-1.5 flex items-center justify-between text-xs text-zinc-400">
                 <span>
@@ -73,7 +73,7 @@ export default async function CourseDetailPage({ params }: Props) {
               <ProgressBar value={completed} total={all.length} />
             </div>
             {nextLesson ? (
-              <LinkButton href={`/courses/${course.slug}/${nextLesson.slug}`}>
+              <LinkButton href={`/courses/${course.slug}/${nextLesson.slug}`} className="w-full sm:w-auto text-center justify-center min-h-[44px]">
                 {completed ? "Continue" : "Start"} <ArrowRight className="h-4 w-4" />
               </LinkButton>
             ) : null}

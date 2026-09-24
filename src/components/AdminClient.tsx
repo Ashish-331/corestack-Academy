@@ -1030,8 +1030,11 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                     {editorTab === "write" ? (
                       <div className="space-y-3">
                         {/* Formatting Shortcut Buttons */}
-                        <div className="flex flex-wrap items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900/60 p-2">
-                          <span className="px-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+                        <div
+                          className="flex overflow-x-auto flex-nowrap sm:flex-wrap items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900/60 p-2 scrollbar-none"
+                          style={{ WebkitOverflowScrolling: "touch" }}
+                        >
+                          <span className="shrink-0 px-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                             Shortcuts:
                           </span>
                           <button
@@ -1041,7 +1044,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 '<div class="callout">\n  <strong>Key Insight:</strong> Explain critical takeaway or rule here.\n</div>\n',
                               )
                             }
-                            className="focus-ring flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
+                            className="focus-ring flex shrink-0 whitespace-nowrap min-h-[36px] items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2.5 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
                             title="Insert key insight callout box"
                           >
                             <Lightbulb className="h-3.5 w-3.5 text-zinc-400" /> Callout
@@ -1053,7 +1056,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 '<div class="callout analogy">\n  <strong>Real-World Analogy:</strong> Relate this concept to an everyday real-world parallel.\n</div>\n',
                               )
                             }
-                            className="focus-ring flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
+                            className="focus-ring flex shrink-0 whitespace-nowrap min-h-[36px] items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2.5 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
                             title="Insert real-world analogy box"
                           >
                             <Lightbulb className="h-3.5 w-3.5 text-zinc-400" /> Analogy
@@ -1065,7 +1068,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 '<pre><code class="language-typescript">// Example implementation\nfunction handleOperation() {\n  return true;\n}\n</code></pre>\n',
                               )
                             }
-                            className="focus-ring flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
+                            className="focus-ring flex shrink-0 whitespace-nowrap min-h-[36px] items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2.5 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
                             title="Insert code snippet block"
                           >
                             <Code2 className="h-3.5 w-3.5 text-zinc-400" /> Code Block
@@ -1077,7 +1080,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 '<div class="overflow-x-auto">\n<table>\n  <thead>\n    <tr><th>Component</th><th>Role</th><th>Trade-off</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>Leader</td><td>Coordinates consensus</td><td>Bottleneck on high write load</td></tr>\n    <tr><td>Follower</td><td>Replicates state machine</td><td>Read lag if eventual</td></tr>\n  </tbody>\n</table>\n</div>\n',
                               )
                             }
-                            className="focus-ring flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
+                            className="focus-ring flex shrink-0 whitespace-nowrap min-h-[36px] items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2.5 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
                             title="Insert structured HTML table"
                           >
                             <Table className="h-3.5 w-3.5 text-zinc-400" /> Table
@@ -1089,7 +1092,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 '<div class="callout">\n  <strong>Check Your Understanding:</strong> What happens when a network partition disconnects the minority quorum?\n</div>\n',
                               )
                             }
-                            className="focus-ring flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
+                            className="focus-ring flex shrink-0 whitespace-nowrap min-h-[36px] items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2.5 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
                             title="Insert quiz check prompt"
                           >
                             <HelpCircle className="h-3.5 w-3.5 text-zinc-400" /> Quiz Block
@@ -1101,7 +1104,7 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
                                 '<p class="lead">Introductory thesis sentence that highlights the core concept of this lesson.</p>\n',
                               )
                             }
-                            className="focus-ring flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
+                            className="focus-ring flex shrink-0 whitespace-nowrap min-h-[36px] items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2.5 py-1 text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800"
                             title="Insert lead paragraph"
                           >
                             <FileText className="h-3.5 w-3.5 text-zinc-400" /> Lead Paragraph
@@ -1211,16 +1214,19 @@ export default function AdminClient({ courses }: { courses: AdminCourse[] }) {
 
       {/* ─────────────────────────── HTML Importer Modal ─────────────────────────── */}
       {importModalOpen ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-zinc-950/80 p-4 backdrop-blur-sm">
-          <div className="panel animate-fade-up my-8 max-h-[90vh] w-full max-w-3xl overflow-y-auto border-zinc-800 bg-zinc-900 p-6 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-zinc-950/80 p-2 sm:p-4 backdrop-blur-sm">
+          <div
+            className="panel animate-fade-up my-4 sm:my-8 max-h-[92vh] w-full max-w-[calc(100vw-2rem)] sm:max-w-3xl overflow-y-auto border-zinc-800 bg-zinc-900 p-4 sm:p-6 shadow-2xl"
+            style={{ WebkitOverflowScrolling: "touch" }}
+          >
             <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
-              <div className="flex items-center gap-3">
-                <div className="grid h-10 w-10 place-items-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-300">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-300">
                   <FileCode className="h-5 w-5" />
                 </div>
-                <div>
-                  <h2 className="text-lg font-bold text-white">Import Course or Lessons via HTML</h2>
-                  <p className="text-xs text-zinc-400">
+                <div className="min-w-0">
+                  <h2 className="text-base sm:text-lg font-bold text-white truncate">Import via HTML</h2>
+                  <p className="text-xs text-zinc-400 line-clamp-1 sm:line-clamp-none">
                     Ingest full course curricula or lesson HTML. Headings are safely extracted into modules and rich lessons.
                   </p>
                 </div>

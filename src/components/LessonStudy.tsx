@@ -78,11 +78,11 @@ export function Quiz({ questions, saved }: { questions: QuizItem[]; saved: Recor
                 <span className="mr-2 text-zinc-500">{qi + 1}.</span>
                 {q.question}
               </p>
-              <div className="mt-3 grid gap-2">
+              <div className="mt-3 grid gap-2.5">
                 {q.options.map((opt, i) => {
                   const chosenThis = chosen === i;
                   const revealCorrect = isAnswered && i === q.answer;
-                  const base = "flex items-start gap-2.5 rounded-lg border px-3 py-2 text-left text-sm transition";
+                  const base = "flex items-start gap-3 rounded-lg border px-3.5 py-3 text-left text-sm transition min-h-[48px] active:scale-[0.99] touch-manipulation";
                   const cls = revealCorrect
                     ? "border-emerald-700/80 bg-emerald-950/40 text-emerald-200"
                     : chosenThis
@@ -90,19 +90,19 @@ export function Quiz({ questions, saved }: { questions: QuizItem[]; saved: Recor
                       : "border-zinc-800 bg-zinc-900/50 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-800/60";
                   return (
                     <button key={i} onClick={() => pick(q.id, i, chosen)} disabled={pending === q.id} className={`${base} ${cls} focus-ring`}>
-                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border border-zinc-700 bg-zinc-800 text-[11px] font-bold text-zinc-300">
+                      <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded border border-zinc-700 bg-zinc-800 text-xs font-bold text-zinc-300">
                         {String.fromCharCode(65 + i)}
                       </span>
-                      <span className="flex-1">{opt}</span>
-                      {revealCorrect ? <Check className="h-4 w-4 shrink-0" /> : null}
-                      {chosenThis && !revealCorrect ? <X className="h-4 w-4 shrink-0" /> : null}
+                      <span className="flex-1 leading-snug">{opt}</span>
+                      {revealCorrect ? <Check className="h-4 w-4 shrink-0 mt-0.5 text-emerald-400" /> : null}
+                      {chosenThis && !revealCorrect ? <X className="h-4 w-4 shrink-0 mt-0.5 text-rose-400" /> : null}
                     </button>
                   );
                 })}
               </div>
 
               {isAnswered ? (
-                <p className={`mt-3 rounded-lg border px-3 py-2 text-[13px] leading-6 ${isCorrect ? "border-emerald-800/60 bg-emerald-950/30 text-emerald-200" : "border-amber-800/60 bg-amber-950/30 text-amber-200"}`}>
+                <p className={`mt-3 rounded-lg border p-3.5 text-xs sm:text-[13px] leading-6 break-words ${isCorrect ? "border-emerald-800/60 bg-emerald-950/30 text-emerald-200" : "border-amber-800/60 bg-amber-950/30 text-amber-200"}`}>
                   <strong className="font-semibold">{isCorrect ? "Correct. " : "Not quite. "}</strong>
                   {q.explain}
                 </p>
@@ -122,26 +122,39 @@ export function Practice({ problems }: { problems: { id: number; prompt: string;
   if (!problems.length) return null;
 
   return (
-    <section className="panel p-5" id="practice">
+    <section className="panel p-4 sm:p-5" id="practice">
       <h2 className="text-base font-semibold text-white">Practice</h2>
       <ol className="mt-4 space-y-4">
         {problems.map((p, i) => (
           <li key={p.id} className="rounded-lg border border-zinc-800 bg-zinc-900/60 p-4">
-            <p className="text-sm text-zinc-200">
-              <span className="mr-2 text-zinc-500">{i + 1}.</span>
+            <p className="text-sm text-zinc-200 break-words">
+              <span className="mr-2 text-zinc-500 font-semibold">{i + 1}.</span>
               {p.prompt}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
-              <button onClick={() => setOpen((o) => ({ ...o, [p.id]: o[p.id] === "hint" ? null : "hint" }))} className={buttonClass("secondary", "px-3 py-1.5 text-xs")}>
+              <button
+                onClick={() => setOpen((o) => ({ ...o, [p.id]: o[p.id] === "hint" ? null : "hint" }))}
+                className={buttonClass("secondary", "min-h-[40px] px-3.5 py-2 text-xs")}
+              >
                 Hint
               </button>
-              <button onClick={() => setOpen((o) => ({ ...o, [p.id]: o[p.id] === "solution" ? null : "solution" }))} className={buttonClass("secondary", "px-3 py-1.5 text-xs")}>
+              <button
+                onClick={() => setOpen((o) => ({ ...o, [p.id]: o[p.id] === "solution" ? null : "solution" }))}
+                className={buttonClass("secondary", "min-h-[40px] px-3.5 py-2 text-xs")}
+              >
                 Solution
               </button>
             </div>
-            {open[p.id] === "hint" && p.hint ? <p className="mt-3 rounded-lg bg-amber-400/10 px-3 py-2 text-[13px] text-amber-100">{p.hint}</p> : null}
+            {open[p.id] === "hint" && p.hint ? (
+              <p className="mt-3 rounded-lg bg-amber-400/10 p-3 text-xs sm:text-[13px] text-amber-100 break-words leading-relaxed">
+                {p.hint}
+              </p>
+            ) : null}
             {open[p.id] === "solution" ? (
-              <pre className="mt-3 overflow-x-auto rounded-lg bg-zinc-900/80 p-3 text-[12.5px] leading-6 text-zinc-200">
+              <pre
+                className="mt-3 max-w-full overflow-x-auto rounded-lg bg-zinc-900/80 p-3 sm:p-4 text-[12px] sm:text-[12.5px] leading-6 text-zinc-200"
+                style={{ WebkitOverflowScrolling: "touch" }}
+              >
                 <code>{p.solution}</code>
               </pre>
             ) : null}
@@ -213,7 +226,7 @@ export function NotesPanel({ lessonId, initial }: { lessonId: number; initial: N
   }
 
   return (
-    <section className="panel p-5" id="notes">
+    <section className="panel p-4 sm:p-5" id="notes">
       <h2 className="text-base font-semibold text-white">Your notes on this lesson</h2>
 
       <div className="mt-3 space-y-2">
@@ -222,10 +235,14 @@ export function NotesPanel({ lessonId, initial }: { lessonId: number; initial: N
           onChange={(e) => setDraft(e.target.value)}
           rows={3}
           placeholder="Write while you read — the first line becomes the title."
-          className={inputClass}
+          className="w-full rounded-md border border-zinc-800 bg-zinc-900/70 p-3 text-base sm:text-sm text-zinc-100 placeholder:text-zinc-500 focus-ring focus:border-zinc-600"
         />
-        <div className="flex justify-end">
-          <button onClick={add} disabled={busy || !draft.trim()} className={buttonClass("primary", "px-3 py-2 text-xs")}>
+        <div className="flex flex-col sm:flex-row justify-end">
+          <button
+            onClick={add}
+            disabled={busy || !draft.trim()}
+            className={buttonClass("primary", "w-full sm:w-auto min-h-[42px] px-4 py-2 text-xs")}
+          >
             {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Plus className="h-3.5 w-3.5" />}
             Add note
           </button>
@@ -241,12 +258,20 @@ export function NotesPanel({ lessonId, initial }: { lessonId: number; initial: N
           {notes.map((note) => {
             const rollback = note;
             return (
-              <li key={note.id} className={`rounded-lg border p-3 ${note.pinned ? "border-amber-400/25 bg-amber-400/[0.06]" : "border-zinc-800 bg-zinc-900/60"}`}>
+              <li key={note.id} className={`rounded-lg border p-3.5 sm:p-4 ${note.pinned ? "border-amber-400/25 bg-amber-400/[0.06]" : "border-zinc-800 bg-zinc-900/60"}`}>
                 {editing === note.id ? (
                   <div className="space-y-2">
-                    <input value={editValue} onChange={(e) => setEditValue(e.target.value)} className={inputClass} autoFocus />
-                    <div className="flex justify-end gap-2">
-                      <button onClick={() => setEditing(null)} className={buttonClass("ghost", "px-3 py-1.5 text-xs")}>
+                    <input
+                      value={editValue}
+                      onChange={(e) => setEditValue(e.target.value)}
+                      className="w-full rounded-md border border-zinc-800 bg-zinc-900/70 px-3 py-2 text-base sm:text-sm text-zinc-100 placeholder:text-zinc-500 focus-ring focus:border-zinc-600"
+                      autoFocus
+                    />
+                    <div className="flex flex-col sm:flex-row justify-end gap-2">
+                      <button
+                        onClick={() => setEditing(null)}
+                        className={buttonClass("ghost", "w-full sm:w-auto min-h-[40px] px-3 py-1.5 text-xs")}
+                      >
                         Cancel
                       </button>
                       <button
@@ -254,7 +279,7 @@ export function NotesPanel({ lessonId, initial }: { lessonId: number; initial: N
                           await patch(note.id, { body: editValue, title: (editValue.split("\n")[0] || "Note").slice(0, 60) }, rollback);
                           setEditing(null);
                         }}
-                        className={buttonClass("primary", "px-3 py-1.5 text-xs")}
+                        className={buttonClass("primary", "w-full sm:w-auto min-h-[40px] px-3 py-1.5 text-xs")}
                       >
                         Save
                       </button>
@@ -262,11 +287,11 @@ export function NotesPanel({ lessonId, initial }: { lessonId: number; initial: N
                   </div>
                 ) : (
                   <>
-                    <p className="whitespace-pre-wrap text-[13.5px] leading-6 text-zinc-200">{note.body}</p>
-                    <div className="mt-2 flex items-center gap-1 text-[11px] text-zinc-500">
+                    <p className="whitespace-pre-wrap text-[13.5px] leading-6 text-zinc-200 break-words">{note.body}</p>
+                    <div className="mt-3 flex items-center gap-1.5 text-[11px] text-zinc-500">
                       <button
                         onClick={() => patch(note.id, { pinned: !note.pinned }, rollback)}
-                        className="focus-ring rounded-lg p-1.5 hover:bg-zinc-800 hover:text-amber-200"
+                        className="focus-ring flex h-8 w-8 items-center justify-center rounded-lg hover:bg-zinc-800 hover:text-amber-200"
                         title={note.pinned ? "Unpin" : "Pin"}
                       >
                         {note.pinned ? <PinOff className="h-3.5 w-3.5" /> : <Pin className="h-3.5 w-3.5" />}
@@ -276,12 +301,16 @@ export function NotesPanel({ lessonId, initial }: { lessonId: number; initial: N
                           setEditing(note.id);
                           setEditValue(note.body);
                         }}
-                        className="focus-ring rounded-lg p-1.5 hover:bg-zinc-800 hover:text-zinc-200"
+                        className="focus-ring flex h-8 w-8 items-center justify-center rounded-lg hover:bg-zinc-800 hover:text-zinc-200"
                         title="Edit"
                       >
                         <Pencil className="h-3.5 w-3.5" />
                       </button>
-                      <button onClick={() => remove(note.id)} className="focus-ring rounded-lg p-1.5 hover:bg-zinc-800 hover:text-rose-300" title="Delete">
+                      <button
+                        onClick={() => remove(note.id)}
+                        className="focus-ring flex h-8 w-8 items-center justify-center rounded-lg hover:bg-zinc-800 hover:text-rose-300"
+                        title="Delete"
+                      >
                         <Trash2 className="h-3.5 w-3.5" />
                       </button>
                       <span className="ml-auto">{new Date(note.updatedAt).toLocaleDateString()}</span>

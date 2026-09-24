@@ -98,14 +98,14 @@ export default function CatalogClient({ courses, initialQuery = "" }: { courses:
         </p>
       </header>
 
-      <div className="panel flex flex-col gap-3 p-4 sm:flex-row sm:items-center">
+      <div className="panel flex flex-col gap-3 p-3.5 sm:p-4 sm:flex-row sm:items-center">
         <div className="relative flex-1">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
           <input
             value={q}
             onChange={(e) => updateQuery(e.target.value)}
             placeholder="Try “deadlock”, “B+ tree”, “sliding window”, “TLS”…"
-            className="w-full rounded-md border border-zinc-800 bg-zinc-900/70 py-2 pl-9 pr-9 text-sm text-zinc-100 placeholder:text-zinc-500 focus-ring focus:border-zinc-600"
+            className="w-full rounded-md border border-zinc-800 bg-zinc-900/70 py-2 pl-9 pr-9 text-base sm:text-sm text-zinc-100 placeholder:text-zinc-500 focus-ring focus:border-zinc-600"
           />
           {loading ? (
             <Loader2 className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-zinc-500" />
@@ -115,12 +115,15 @@ export default function CatalogClient({ courses, initialQuery = "" }: { courses:
             </button>
           ) : null}
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div
+          className="flex overflow-x-auto flex-nowrap sm:flex-wrap items-center gap-2 pb-1 sm:pb-0 scrollbar-none -mx-1 px-1"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
           {categories.map((c) => (
             <button
               key={c}
               onClick={() => setCategory(c)}
-              className={`focus-ring rounded-md px-3 py-1.5 text-xs font-medium transition ${
+              className={`focus-ring shrink-0 rounded-md px-3.5 py-1.5 text-xs font-medium transition min-h-[36px] ${
                 category === c ? "border border-zinc-700 bg-zinc-800 text-zinc-100" : "border border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200"
               }`}
             >

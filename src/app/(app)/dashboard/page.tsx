@@ -21,11 +21,11 @@ export default async function DashboardPage() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-8">
-      <header className="animate-fade-up flex flex-wrap items-end justify-between gap-4">
+      <header className="animate-fade-up flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-zinc-400">CoreStack Academy · Dashboard</p>
-          <h1 className="mt-1 text-3xl font-bold tracking-tight text-white">Welcome back to CoreStack Academy, {firstName}</h1>
-          <p className="mt-1.5 text-sm text-zinc-400">
+          <h1 className="mt-1 text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight">Welcome back to CoreStack Academy, {firstName}</h1>
+          <p className="mt-1.5 text-xs sm:text-sm text-zinc-400">
             {data.continueRows.length
               ? `You have ${data.continueRows.length} lesson${data.continueRows.length > 1 ? "s" : ""} in progress.`
               : totalCompleted
@@ -33,12 +33,12 @@ export default async function DashboardPage() {
                 : "Let's get the first lesson under your belt."}
           </p>
         </div>
-        <LinkButton href="/catalog" tone="secondary">
+        <LinkButton href="/catalog" tone="secondary" className="w-full sm:w-auto text-center justify-center">
           Browse catalog <ArrowRight className="h-4 w-4" />
         </LinkButton>
       </header>
 
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         <StatCard
           label="Lessons completed"
           value={data.completed}

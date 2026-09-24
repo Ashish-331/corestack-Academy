@@ -70,7 +70,7 @@ export default function PrivacyPolicyPage() {
       </div>
 
       {/* Core Privacy Guarantees Grid */}
-      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {[
           {
             icon: EyeOff,
@@ -110,16 +110,19 @@ export default function PrivacyPolicyPage() {
       </section>
 
       {/* Jump Navigation Bar */}
-      <div className="panel p-4">
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 font-mono mb-2.5">
+      <div className="panel p-3.5 sm:p-4">
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 font-mono mb-2">
           Table of Contents
         </p>
-        <div className="flex flex-wrap gap-2">
+        <div
+          className="flex overflow-x-auto flex-nowrap sm:flex-wrap items-center gap-2 pb-1 sm:pb-0 scrollbar-none -mx-1 px-1"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
           {SECTIONS.map((sec) => (
             <a
               key={sec.id}
               href={`#${sec.id}`}
-              className="inline-flex items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 px-2.5 py-1 text-xs text-zinc-400 transition hover:border-zinc-700 hover:bg-zinc-800 hover:text-zinc-100"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 text-xs text-zinc-400 transition hover:border-zinc-700 hover:bg-zinc-800 hover:text-zinc-100 min-h-[36px]"
             >
               <span className="font-mono text-[10px] text-zinc-500">{sec.number}</span>
               <span>{sec.title}</span>
@@ -129,9 +132,9 @@ export default function PrivacyPolicyPage() {
       </div>
 
       {/* Main Content Sections */}
-      <div className="space-y-10">
+      <div className="space-y-8 sm:space-y-10">
         {/* Section 1 */}
-        <section id="overview" className="panel p-6 sm:p-8 space-y-4 scroll-mt-20">
+        <section id="overview" className="panel p-4 sm:p-6 sm:p-8 space-y-4 scroll-mt-20">
           <div className="flex items-baseline gap-3">
             <span className="font-mono text-xs font-semibold text-zinc-500">01</span>
             <h2 className="text-xl font-bold tracking-tight text-white">Overview & Commitment to Privacy</h2>

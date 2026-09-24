@@ -175,24 +175,22 @@ export default function ProfileClient({ initialData }: { initialData: ProfileDat
       </div>
 
       {/* 1. User Identity Card */}
-      <div className="panel p-6">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-4">
-            <div className="grid h-16 w-16 shrink-0 place-items-center rounded-lg border border-zinc-800 bg-zinc-900 text-xl font-bold text-zinc-200">
-              {initials}
+      <div className="panel p-5 sm:p-6">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-5">
+          <div className="grid h-16 w-16 shrink-0 place-items-center rounded-lg border border-zinc-800 bg-zinc-900 text-xl font-bold text-zinc-200">
+            {initials}
+          </div>
+          <div className="min-w-0 space-y-1.5 flex flex-col items-center sm:items-start">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
+              <h2 className="truncate text-xl font-bold text-white">{user.name}</h2>
+              <Badge tone={user.role === "admin" ? "amber" : "slate"}>
+                {user.role === "admin" ? "Admin" : "Student"}
+              </Badge>
             </div>
-            <div className="min-w-0 space-y-1">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <h2 className="truncate text-xl font-bold text-white">{user.name}</h2>
-                <Badge tone={user.role === "admin" ? "amber" : "slate"}>
-                  {user.role === "admin" ? "Admin" : "Student"}
-                </Badge>
-              </div>
-              <p className="truncate font-mono text-sm text-zinc-400">{user.email}</p>
-              <div className="flex items-center gap-1.5 text-xs text-zinc-400">
-                <Calendar className="h-3.5 w-3.5 text-zinc-500" />
-                <span>Member since {formatMemberDate(user.createdAt)}</span>
-              </div>
+            <p className="truncate font-mono text-sm text-zinc-400">{user.email}</p>
+            <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs text-zinc-400">
+              <Calendar className="h-3.5 w-3.5 text-zinc-500" />
+              <span>Member since {formatMemberDate(user.createdAt)}</span>
             </div>
           </div>
         </div>
@@ -204,7 +202,7 @@ export default function ProfileClient({ initialData }: { initialData: ProfileDat
           <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">Learning Overview</h2>
           <p className="mt-0.5 text-xs text-zinc-500">Summary of study activity and saved resources across CoreStack Academy.</p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           <StatCard
             label="Completed lessons"
             value={stats.completedLessons}

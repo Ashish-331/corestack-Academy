@@ -3,14 +3,19 @@
 @theme {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, monospace;
+  --breakpoint-xs: 23.5rem;
 }
 
 @layer base {
   html {
     color-scheme: dark;
+    max-width: 100vw;
+    overflow-x: clip;
   }
   body {
     @apply bg-zinc-950 text-zinc-200 antialiased;
+    max-width: 100vw;
+    overflow-x: clip;
   }
   ::selection {
     @apply bg-zinc-700 text-white;
@@ -42,6 +47,13 @@
   .focus-ring {
     @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400;
   }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* ── animations ─────────────────────────────────────────────── */
@@ -55,7 +67,9 @@
 /* ── lesson typography ──────────────────────────────────────── */
 .lesson,
 .lesson-prose {
-  @apply text-[15.5px] leading-7 text-zinc-300;
+  @apply text-[15px] sm:text-[15.5px] leading-7 text-zinc-300;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .lesson > *:first-child,
 .lesson-prose > *:first-child {
@@ -69,31 +83,31 @@
 .lesson-prose h2,
 .lesson-prose h3,
 .lesson-prose h4 {
-  @apply mt-10 mb-3 scroll-mt-24 font-semibold text-zinc-100;
+  @apply mt-8 sm:mt-10 mb-3 scroll-mt-24 font-semibold text-zinc-100;
 }
 .lesson h1,
 .lesson-prose h1 {
-  @apply text-2xl;
+  @apply text-xl sm:text-2xl;
 }
 .lesson h2,
 .lesson-prose h2 {
-  @apply text-xl;
+  @apply text-lg sm:text-xl;
 }
 .lesson h3,
 .lesson-prose h3 {
-  @apply text-lg text-zinc-200;
+  @apply text-base sm:text-lg text-zinc-200;
 }
 .lesson h4,
 .lesson-prose h4 {
-  @apply text-base text-zinc-300;
+  @apply text-sm sm:text-base text-zinc-300;
 }
 .lesson p,
 .lesson-prose p {
-  @apply my-4;
+  @apply my-3.5 sm:my-4;
 }
 .lesson p.lead,
 .lesson-prose p.lead {
-  @apply border-l-2 border-zinc-600 pl-4 text-[17px] leading-8 text-zinc-200;
+  @apply border-l-2 border-zinc-600 pl-3.5 sm:pl-4 text-[15.5px] sm:text-[17px] leading-7 sm:leading-8 text-zinc-200;
 }
 .lesson strong,
 .lesson-prose strong {
@@ -109,11 +123,11 @@
 }
 .lesson ul,
 .lesson-prose ul {
-  @apply my-4 list-disc space-y-2 pl-6;
+  @apply my-4 list-disc space-y-2 pl-5 sm:pl-6;
 }
 .lesson ol,
 .lesson-prose ol {
-  @apply my-4 list-decimal space-y-2 pl-6;
+  @apply my-4 list-decimal space-y-2 pl-5 sm:pl-6;
 }
 .lesson li::marker,
 .lesson-prose li::marker {
@@ -121,27 +135,29 @@
 }
 .lesson blockquote,
 .lesson-prose blockquote {
-  @apply my-5 border-l-2 border-zinc-700 pl-4 py-1 text-zinc-300 italic;
+  @apply my-5 border-l-2 border-zinc-700 pl-3.5 sm:pl-4 py-1 text-zinc-300 italic;
 }
 .lesson code,
 .lesson-prose code {
-  @apply border border-zinc-800 bg-zinc-900 px-1.5 py-0.5 font-mono text-[13px] text-zinc-200 rounded;
+  @apply border border-zinc-800 bg-zinc-900 px-1.5 py-0.5 font-mono text-[12.5px] sm:text-[13px] text-zinc-200 rounded break-all sm:break-normal;
 }
 .lesson pre,
 .lesson-prose pre {
-  @apply my-5 overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-900/90 p-4 text-[13px] leading-6;
+  @apply my-5 max-w-full overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-900/90 p-3 sm:p-4 text-[12px] sm:text-[13px] leading-6;
+  -webkit-overflow-scrolling: touch;
 }
 .lesson pre code,
 .lesson-prose pre code {
-  @apply border-0 bg-transparent p-0 text-zinc-200;
+  @apply border-0 bg-transparent p-0 text-zinc-200 break-normal;
 }
 .lesson table,
 .lesson-prose table {
-  @apply my-6 w-full border-collapse overflow-hidden rounded-lg border border-zinc-800 text-sm;
+  @apply my-6 block w-full max-w-full overflow-x-auto border-collapse rounded-lg border border-zinc-800 text-xs sm:text-sm;
+  -webkit-overflow-scrolling: touch;
 }
 .lesson thead th,
 .lesson-prose thead th {
-  @apply border border-zinc-800 bg-zinc-900 px-3 py-2 text-left font-semibold text-zinc-100;
+  @apply border border-zinc-800 bg-zinc-900 px-3 py-2 text-left font-semibold text-zinc-100 whitespace-nowrap;
 }
 .lesson tbody td,
 .lesson-prose tbody td {
@@ -153,7 +169,7 @@
 }
 .lesson .callout,
 .lesson-prose .callout {
-  @apply my-6 rounded-lg border border-zinc-800 bg-zinc-900/70 px-4 py-3 text-zinc-300;
+  @apply my-6 max-w-full rounded-lg border border-zinc-800 bg-zinc-900/70 p-3.5 sm:p-4 text-zinc-300 break-words;
 }
 .lesson .callout.analogy,
 .lesson-prose .callout.analogy {
@@ -161,5 +177,5 @@
 }
 .lesson img,
 .lesson-prose img {
-  @apply my-6 rounded-lg border border-zinc-800;
+  @apply my-6 max-w-full h-auto rounded-lg border border-zinc-800;
 }

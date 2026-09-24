@@ -54,7 +54,7 @@ export default function AdminLoginForm() {
 
   return (
     <div className="w-full max-w-md">
-      <div className="panel p-7">
+      <div className="panel p-5 sm:p-7">
         {/* Header with Icon & Role Badges */}
         <div className="flex items-center justify-between">
           <div className="grid h-12 w-12 place-items-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-200">
@@ -65,13 +65,13 @@ export default function AdminLoginForm() {
           </span>
         </div>
 
-        <h1 className="mt-5 text-2xl font-bold tracking-tight text-white">Admin & Author Sign In</h1>
-        <p className="mt-1.5 text-sm text-zinc-400">
+        <h1 className="mt-5 text-xl sm:text-2xl font-bold tracking-tight text-white">Admin & Author Sign In</h1>
+        <p className="mt-1.5 text-xs sm:text-sm text-zinc-400">
           Enter administrative credentials to manage course curricula, import HTML, and edit catalog lessons.
         </p>
 
         {/* Role Badges */}
-        <div className="mt-4 flex flex-wrap items-center gap-2">
+        <div className="mt-4 flex flex-wrap items-center gap-1.5 sm:gap-2">
           <Badge>Author Privileges</Badge>
           <Badge>Curriculum Editor</Badge>
           <Badge>HTML Ingestion</Badge>
@@ -127,7 +127,7 @@ export default function AdminLoginForm() {
           <button
             type="submit"
             disabled={busy}
-            className={buttonClass("primary", "w-full py-2.5")}
+            className={buttonClass("primary", "w-full py-2.5 min-h-[44px]")}
           >
             {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <KeyRound className="h-4 w-4" />}
             {busy ? "Authenticating…" : "Sign In to Admin Studio"}
@@ -140,16 +140,16 @@ export default function AdminLoginForm() {
           <button
             type="button"
             onClick={fillDemoAdmin}
-            className="focus-ring flex w-full items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/60 px-3.5 py-2.5 text-left text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800/60"
+            className="focus-ring flex w-full flex-col xs:flex-row xs:items-center justify-between gap-2 rounded-lg border border-zinc-800 bg-zinc-900/60 p-3 text-left text-xs font-medium text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800/60 active:scale-[0.99]"
           >
-            <span className="flex items-center gap-2">
-              <KeyRound className="h-4 w-4 text-zinc-400" />
-              <span>
-                <strong className="text-zinc-100">1-Click Fill Demo Admin</strong>
-                <span className="block text-[11px] text-zinc-400">author@corestack.dev / corestack123</span>
+            <span className="flex items-center gap-2 min-w-0">
+              <KeyRound className="h-4 w-4 shrink-0 text-zinc-400" />
+              <span className="min-w-0">
+                <strong className="block text-zinc-100 truncate">1-Click Fill Demo Admin</strong>
+                <span className="block text-[11px] text-zinc-400 truncate">author@corestack.dev / corestack123</span>
               </span>
             </span>
-            <span className="rounded border border-zinc-700 bg-zinc-800 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-zinc-300">
+            <span className="self-start xs:self-center shrink-0 rounded border border-zinc-700 bg-zinc-800 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-zinc-300">
               Auto-fill
             </span>
           </button>

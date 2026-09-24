@@ -99,11 +99,11 @@ export default function NotesClient({ initial }: { initial: NoteRow[] }) {
         <p className="mt-1.5 text-sm text-zinc-400">Notes taken inside a lesson link back to it. Pin the ones you want on top.</p>
       </header>
 
-      <div className="panel space-y-3 p-5">
+      <div className="panel space-y-3 p-4 sm:p-5">
         <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Note title" className={inputClass} />
         <textarea value={body} onChange={(e) => setBody(e.target.value)} rows={4} placeholder="Write it down…" className={inputClass} />
-        <div className="flex justify-end">
-          <button onClick={create} disabled={busy} className={buttonClass("primary", "px-3.5 py-2 text-sm")}>
+        <div className="flex flex-col sm:flex-row justify-end">
+          <button onClick={create} disabled={busy} className={buttonClass("primary", "w-full sm:w-auto min-h-[42px] px-4 py-2 text-xs sm:text-sm")}>
             {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />} Add note
           </button>
         </div>

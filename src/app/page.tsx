@@ -14,48 +14,54 @@ export default async function LandingPage() {
   const totalMinutes = courses.reduce((n, c) => n + c.minutes, 0);
 
   return (
-    <div className="mx-auto max-w-6xl px-5 py-8">
-      <header className="flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-md border border-zinc-800 bg-zinc-900 font-bold text-zinc-100">CS</span>
-          <span className="text-lg font-bold tracking-tight text-white">CoreStack Academy</span>
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 py-6 sm:py-8">
+      <header className="flex items-center justify-between gap-2">
+        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+          <span className="grid h-9 w-9 sm:h-10 sm:w-10 shrink-0 place-items-center rounded-md border border-zinc-800 bg-zinc-900 font-bold text-sm sm:text-base text-zinc-100">
+            CS
+          </span>
+          <span className="text-base sm:text-lg font-bold tracking-tight text-white truncate">
+            <span className="xs:hidden inline">CoreStack</span>
+            <span className="hidden xs:inline">CoreStack Academy</span>
+          </span>
         </Link>
-        <nav className="flex items-center gap-2">
+        <nav className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {user ? (
-            <LinkButton href="/dashboard" tone="primary">
-              Go to dashboard <ArrowRight className="h-4 w-4" />
+            <LinkButton href="/dashboard" tone="primary" className="text-xs sm:text-sm px-3 py-1.5 sm:px-4 sm:py-2">
+              <span>Dashboard</span> <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </LinkButton>
           ) : (
             <>
-              <LinkButton href="/login" tone="ghost">
+              <LinkButton href="/login" tone="ghost" className="text-xs sm:text-sm px-2.5 py-1.5 sm:px-4 sm:py-2">
                 Sign in
               </LinkButton>
-              <LinkButton href="/register" tone="primary">
-                Start free
+              <LinkButton href="/register" tone="primary" className="text-xs sm:text-sm px-3 py-1.5 sm:px-4 sm:py-2 whitespace-nowrap">
+                <span className="hidden xs:inline">Start free</span>
+                <span className="xs:hidden inline">Start</span>
               </LinkButton>
             </>
           )}
         </nav>
       </header>
 
-      <section className="mt-16 grid items-center gap-10 lg:mt-24 lg:grid-cols-[1.15fr_1fr]">
+      <section className="mt-12 sm:mt-16 grid items-center gap-8 lg:gap-10 lg:mt-24 lg:grid-cols-[1.15fr_1fr]">
         <div>
-          <span className="chip">
+          <span className="chip text-[11px] sm:text-xs">
             <BookOpen className="h-3.5 w-3.5 text-zinc-400" /> {totalLessons} authored lessons · {Math.round(totalMinutes / 60)} hours
           </span>
-          <h1 className="mt-5 text-4xl font-black leading-[1.08] tracking-tight text-white sm:text-5xl">
+          <h1 className="mt-4 sm:mt-5 text-3xl sm:text-4xl lg:text-5xl font-black leading-[1.12] tracking-tight text-white">
             The CS curriculum you keep restarting — <span className="text-zinc-400 font-normal">finally finished.</span>
           </h1>
-          <p className="mt-5 max-w-xl text-[17px] leading-8 text-zinc-300">
+          <p className="mt-4 sm:mt-5 max-w-xl text-base sm:text-[17px] leading-7 sm:leading-8 text-zinc-300">
             CoreStack Academy turns six interview-critical subjects into a tracked course platform: operating systems, DBMS, system design,
             DSA, object-oriented design and computer networks. Real lessons, graded quizzes, inline notes, and progress stored in
             Postgres against your account.
           </p>
-          <div className="mt-7 flex flex-wrap items-center gap-3">
-            <LinkButton href={user ? "/dashboard" : "/register"}>
+          <div className="mt-6 sm:mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <LinkButton href={user ? "/dashboard" : "/register"} className="w-full sm:w-auto text-center justify-center min-h-[44px]">
               {user ? "Open dashboard" : "Create your account"} <ArrowRight className="h-4 w-4" />
             </LinkButton>
-            <LinkButton href="/catalog" tone="secondary">
+            <LinkButton href="/catalog" tone="secondary" className="w-full sm:w-auto text-center justify-center min-h-[44px]">
               Browse the catalog
             </LinkButton>
           </div>
@@ -64,44 +70,50 @@ export default async function LandingPage() {
           </p>
         </div>
 
-        <div className="panel space-y-3 p-5">
+        <div className="panel space-y-3 p-3.5 sm:p-5">
           {courses.slice(0, 4).map((c) => (
-            <Link key={c.slug} href={`/courses/${c.slug}`} className="panel panel-hover flex items-center gap-4 p-4">
-              <CourseGlyph icon={c.icon} />
-              <span className="min-w-0 flex-1">
-                <span className="block truncate text-sm font-semibold text-white">{c.title}</span>
-                <span className="block truncate text-xs text-zinc-400">{c.tagline}</span>
-              </span>
-              <span className="shrink-0 text-right">
+            <Link
+              key={c.slug}
+              href={`/courses/${c.slug}`}
+              className="panel panel-hover flex flex-col xs:flex-row xs:items-center justify-between gap-3 p-3.5 sm:p-4"
+            >
+              <div className="flex items-center gap-3 min-w-0 flex-1">
+                <CourseGlyph icon={c.icon} size="sm" />
+                <div className="min-w-0 flex-1">
+                  <span className="block truncate text-sm font-semibold text-white">{c.title}</span>
+                  <span className="block truncate text-xs text-zinc-400">{c.tagline}</span>
+                </div>
+              </div>
+              <div className="flex xs:flex-col items-center xs:items-end justify-between xs:justify-center border-t xs:border-t-0 border-zinc-800/60 pt-2 xs:pt-0 shrink-0">
                 <span className="block text-xs font-semibold tabular-nums text-zinc-300">{c.lessons} lessons</span>
                 <span className="block text-[11px] text-zinc-500">{minutesLabel(c.minutes)}</span>
-              </span>
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="mt-20 grid gap-4 sm:grid-cols-3">
+      <section className="mt-16 sm:mt-20 grid gap-4 sm:grid-cols-3">
         {[
           { icon: Library, title: "Authored, not templated", body: "Every lesson body is written for its topic — code, tables, callouts and key takeaways. No mail-merged placeholders." },
           { icon: Target, title: "Quizzes that persist", body: "One quiz system, graded server-side, answers stored against your account so retries are visible." },
           { icon: NotebookPen, title: "Notes where you read", body: "Capture a note on the lesson itself, then find every note from one dashboard." },
         ].map((f) => (
-          <div key={f.title} className="panel p-5">
+          <div key={f.title} className="panel p-4 sm:p-5">
             <div className="grid h-10 w-10 place-items-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-300">
               <f.icon className="h-5 w-5" />
             </div>
             <h3 className="mt-4 text-base font-semibold text-white">{f.title}</h3>
-            <p className="mt-1.5 text-sm leading-6 text-zinc-400">{f.body}</p>
+            <p className="mt-1.5 text-xs sm:text-sm leading-6 text-zinc-400">{f.body}</p>
           </div>
         ))}
       </section>
 
-      <section className="mt-20">
-        <h2 className="text-2xl font-bold tracking-tight text-white">The full catalog</h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <section className="mt-16 sm:mt-20">
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">The full catalog</h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {courses.map((c) => (
-            <Link key={c.slug} href={`/courses/${c.slug}`} className="panel panel-hover group flex flex-col p-5">
+            <Link key={c.slug} href={`/courses/${c.slug}`} className="panel panel-hover group flex flex-col p-4 sm:p-5">
               <div className="flex items-center gap-3">
                 <CourseGlyph icon={c.icon} />
                 <div className="min-w-0">
@@ -111,7 +123,7 @@ export default async function LandingPage() {
                   </p>
                 </div>
               </div>
-              <p className="mt-4 flex-1 text-sm leading-6 text-zinc-400">{c.tagline}</p>
+              <p className="mt-3.5 sm:mt-4 flex-1 text-xs sm:text-sm leading-6 text-zinc-400">{c.tagline}</p>
               <div className="mt-4 flex items-center gap-3 text-[11px] text-zinc-500">
                 <span className="inline-flex items-center gap-1">
                   <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> {c.lessons} lessons
