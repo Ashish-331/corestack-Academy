@@ -14,6 +14,7 @@ import {
   Menu,
   Search,
   Settings2,
+  Shield,
   ShieldCheck,
 } from "lucide-react";
 import { CourseGlyph, inputClass } from "@/components/ui";
@@ -55,7 +56,7 @@ export default function AppShell({
   courses,
   children,
 }: {
-  user: ShellUser;
+  user: ShellUser | null;
   courses: ShellCourse[];
   children: React.ReactNode;
 }) {
@@ -120,16 +121,18 @@ export default function AppShell({
     setSearching(true);
   }
 
-  const initials = user.name
-    .split(" ")
-    .map((p) => p[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
+  const initials = user
+    ? user.name
+        .split(" ")
+        .map((p) => p[0])
+        .slice(0, 2)
+        .join("")
+        .toUpperCase()
+    : "CS";
 
   const sidebar = (
     <div onClick={() => setOpen(false)} className="flex h-full flex-col gap-6 overflow-y-auto px-4 py-5">
-      <Link href="/dashboard" className="flex items-center gap-2.5 px-1">
+      <Link href={user ? "/dashboard" : "/catalog"} className="flex items-center gap-2.5 px-1">
         <span className="grid h-8 w-8 place-items-center rounded-md border border-zinc-800 bg-zinc-900 text-xs font-bold text-zinc-100">
           CS
         </span>
@@ -155,7 +158,7 @@ export default function AppShell({
             </Link>
           );
         })}
-        {user.role === "admin" ? (
+        {user?.role === "admin" ? (
           <Link
             href="/admin"
             className={`focus-ring flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition ${
@@ -205,31 +208,68 @@ export default function AppShell({
       </div>
 
       <div className="mt-auto space-y-3 border-t border-zinc-800 pt-4">
-        <div className="flex items-center gap-3 px-1">
-          <span className="grid h-8 w-8 place-items-center rounded-md border border-zinc-800 bg-zinc-900 text-xs font-medium text-zinc-300">
-            {initials}
-          </span>
-          <span className="min-w-0">
-            <span className="block truncate text-[13px] font-medium text-zinc-200">{user.name}</span>
-            <span className="block truncate text-[11px] text-zinc-500">{user.email}</span>
-          </span>
-        </div>
-        <button
-          onClick={signOut}
-          disabled={signingOut}
-          className="focus-ring flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-400 transition hover:bg-zinc-900/60 hover:text-zinc-200 disabled:opacity-60"
-        >
-          {signingOut ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogOut className="h-4 w-4" />}
-          Sign out
-        </button>
-        {user.role !== "admin" ? (
+        {user ? (
+          <>
+            <Link
+              href="/profile"
+              className={`focus-ring group flex items-center gap-3 rounded-lg p-1.5 transition ${
+                pathname === "/profile" ? "bg-zinc-800 text-zinc-100" : "hover:bg-zinc-900/70"
+              }`}
+              title="Profile & Settings"
+            >
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md border border-zinc-800 bg-zinc-900 text-xs font-medium text-zinc-300 group-hover:border-zinc-700">
+                {initials}
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-[13px] font-medium text-zinc-200 group-hover:text-white">{user.name}</span>
+                <span className="block truncate text-[11px] text-zinc-500">{user.email}</span>
+              </span>
+            </Link>
+            <button
+              onClick={signOut}
+              disabled={signingOut}
+              className="focus-ring flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-400 transition hover:bg-zinc-900/60 hover:text-zinc-200 disabled:opacity-60"
+            >
+              {signingOut ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogOut className="h-4 w-4" />}
+              Sign out
+            </button>
+          </>
+        ) : (
+          <div className="space-y-2 px-1">
+            <Link
+              href="/login"
+              className="focus-ring flex w-full items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/70 px-3 py-2 text-xs font-semibold text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800 hover:text-white"
+            >
+              Sign in
+            </Link>
+            <Link
+              href="/register"
+              className="focus-ring flex w-full items-center justify-center rounded-lg bg-zinc-100 px-3 py-2 text-xs font-semibold text-zinc-950 transition hover:bg-white"
+            >
+              Create free account
+            </Link>
+          </div>
+        )}
+
+        <div className="flex items-center justify-between border-t border-zinc-900 px-1 pt-2 text-[11px] text-zinc-500">
           <Link
-            href="/admin-login"
-            className="flex items-center justify-center gap-1.5 px-3 py-1 text-[11px] text-zinc-500 transition hover:text-zinc-300"
+            href="/privacy"
+            className={`flex items-center gap-1.5 transition hover:text-zinc-300 ${
+              pathname === "/privacy" ? "font-semibold text-zinc-200" : "text-zinc-500"
+            }`}
           >
-            <ShieldCheck className="h-3 w-3" /> Author / Admin Sign In
+            <Shield className="h-3 w-3" />
+            <span>Privacy</span>
           </Link>
-        ) : null}
+          {user?.role !== "admin" ? (
+            <Link
+              href="/admin-login"
+              className="flex items-center gap-1 text-[11px] text-zinc-500 transition hover:text-zinc-300"
+            >
+              <ShieldCheck className="h-3 w-3" /> Author
+            </Link>
+          ) : null}
+        </div>
       </div>
     </div>
   );
@@ -324,14 +364,61 @@ export default function AppShell({
           </div>
 
           <div className="ml-auto flex items-center gap-3">
-            <span className="hidden items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/60 px-3 py-1.5 text-xs font-medium text-zinc-300 sm:flex">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Progress saved
-            </span>
+            {user ? (
+              <>
+                <span className="hidden items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/60 px-3 py-1.5 text-xs font-medium text-zinc-300 sm:flex">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  Progress saved
+                </span>
+                <Link
+                  href="/profile"
+                  className={`focus-ring flex items-center gap-2 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition ${
+                    pathname === "/profile"
+                      ? "border-zinc-700 bg-zinc-800 text-white"
+                      : "border-zinc-800 bg-zinc-900/60 text-zinc-300 hover:border-zinc-700 hover:text-white"
+                  }`}
+                  title="Profile & Account Settings"
+                >
+                  <span className="grid h-5 w-5 place-items-center rounded bg-zinc-800 text-[10px] font-semibold text-zinc-200">
+                    {initials}
+                  </span>
+                  <span className="hidden max-w-[120px] truncate sm:inline">{user.name}</span>
+                </Link>
+              </>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/login"
+                  className="rounded-lg px-2.5 py-1 text-xs font-medium text-zinc-400 transition hover:text-zinc-200"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  href="/register"
+                  className="rounded-lg bg-zinc-100 px-3 py-1.5 text-xs font-semibold text-zinc-950 transition hover:bg-white"
+                >
+                  Start free
+                </Link>
+              </div>
+            )}
           </div>
         </header>
 
         <main className="min-w-0 flex-1 px-4 py-6 lg:px-8 lg:py-8">{children}</main>
+
+        <footer className="border-t border-zinc-900/80 px-4 py-3 text-xs text-zinc-500 lg:px-8">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span>CoreStack Academy</span>
+            <div className="flex items-center gap-4">
+              <Link href="/privacy" className="transition hover:text-zinc-300">
+                Privacy Policy
+              </Link>
+              <Link href="/catalog" className="transition hover:text-zinc-300">
+                Catalog
+              </Link>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );

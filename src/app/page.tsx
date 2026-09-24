@@ -125,9 +125,15 @@ export default async function LandingPage() {
 
       <footer className="mt-20 flex flex-wrap items-center justify-between gap-4 border-t border-zinc-800 pt-6 text-xs text-zinc-500">
         <p>CoreStack Academy — a full-stack rebuild of the CoreStack curriculum on Next.js, Drizzle and PostgreSQL.</p>
-        <Link href="/admin-login" className="flex items-center gap-1.5 text-zinc-500 transition hover:text-zinc-300">
-          <ShieldCheck className="h-3.5 w-3.5" /> Author / Admin Sign In
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link href="/privacy" className="transition hover:text-zinc-300">
+            Privacy Policy
+          </Link>
+          <span className="text-zinc-700">·</span>
+          <Link href="/admin-login" className="flex items-center gap-1.5 text-zinc-500 transition hover:text-zinc-300">
+            <ShieldCheck className="h-3.5 w-3.5" /> Author / Admin Sign In
+          </Link>
+        </div>
       </footer>
     </div>
   );

@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { redirect } from "next/navigation";
 import AppShell from "@/components/AppShell";
 import { getCurrentUser } from "@/lib/auth";
 import { listCourseSummaries } from "@/lib/data";
@@ -10,9 +9,8 @@ export const dynamic = "force-dynamic";
 export default async function AppLayout({ children }: { children: ReactNode }) {
   await ensureSeeded();
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
 
-  const courses = await listCourseSummaries(user.id);
+  const courses = await listCourseSummaries(user?.id ?? null);
   return (
     <AppShell
       user={user}

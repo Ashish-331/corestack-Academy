@@ -10,6 +10,7 @@ import {
   progress,
   quizAnswers,
   quizQuestions,
+  users,
 } from "@/db/schema";
 
 export type CourseSummary = {
@@ -423,3 +424,85 @@ export async function searchCatalog(query: string, userId?: number | null) {
     lessons: lessonRows.map((l) => ({ ...l, completed: doneSet.has(l.id) })),
   };
 }
+
+export type UserProfileData = {
+  user: {
+    id: number;
+    email: string;
+    name: string;
+    role: string;
+    createdAt: Date;
+  };
+  stats: {
+    completedLessons: number;
+    streak: number;
+    activeDays: number;
+    bookmarksCount: number;
+    notesCount: number;
+  };
+};
+
+export async function getUserProfile(userId: number): Promise<UserProfileData | null> {
+  const [userRow] = await db
+    .select({
+      id: users.id,
+      email: users.email,
+      name: users.name,
+      role: users.role,
+      createdAt: users.createdAt,
+    })
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  if (!userRow) return null;
+
+  const [statsResult, dayRows] = await Promise.all([
+    db.execute<{
+      completed: string;
+      active_days: string;
+      note_count: string;
+      bookmarks_count: string;
+    }>(sql`
+      select
+        (select count(*) from progress p where p.user_id = ${userId} and p.status = 'completed') as completed,
+        (select count(distinct date_trunc('day', p.updated_at)) from progress p
+          where p.user_id = ${userId} and p.status = 'completed') as active_days,
+        (select count(*) from notes n where n.user_id = ${userId}) as note_count,
+        (select count(*) from bookmarks b where b.user_id = ${userId}) as bookmarks_count
+    `),
+    db.execute<{ d: string }>(sql`
+      select distinct to_char(date_trunc('day', updated_at), 'YYYY-MM-DD') as d
+      from progress
+      where user_id = ${userId} and status = 'completed'
+      order by d desc
+      limit 120
+    `),
+  ]);
+
+  const statsRow = statsResult.rows[0];
+
+  const days = dayRows.rows.map((r) => r.d);
+  const daySet = new Set(days);
+  const today = new Date();
+  const iso = (d: Date) => d.toISOString().slice(0, 10);
+  let streak = 0;
+  const cursor = new Date(today);
+  if (!daySet.has(iso(cursor))) cursor.setDate(cursor.getDate() - 1);
+  while (daySet.has(iso(cursor))) {
+    streak += 1;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+
+  return {
+    user: userRow,
+    stats: {
+      completedLessons: Number(statsRow?.completed ?? 0),
+      streak,
+      activeDays: Number(statsRow?.active_days ?? 0),
+      bookmarksCount: Number(statsRow?.bookmarks_count ?? 0),
+      notesCount: Number(statsRow?.note_count ?? 0),
+    },
+  };
+}
+
