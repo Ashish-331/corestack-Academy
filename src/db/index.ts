@@ -11,10 +11,16 @@ const globalForDb = globalThis as typeof globalThis & {
   __arenaNextJsPostgresqlPool?: Pool;
 };
 
+const isProductionOrCloud =
+  databaseUrl.includes("supabase") ||
+  databaseUrl.includes("pooler.supabase.com") ||
+  databaseUrl.includes("sslmode=require");
+
 export const pool =
   globalForDb.__arenaNextJsPostgresqlPool ??
   new Pool({
     connectionString: databaseUrl,
+    ssl: isProductionOrCloud ? { rejectUnauthorized: false } : undefined,
   });
 
 if (process.env.NODE_ENV !== "production") {
@@ -22,3 +28,4 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 export const db = drizzle(pool);
+
